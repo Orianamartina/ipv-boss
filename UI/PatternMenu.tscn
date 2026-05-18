@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b0yd62xlam7ft"]
+
+[ext_resource type="FontFile" uid="uid://d1gbk8j5mjfmv" path="res://Assets/fonts/Chewy-Regular.ttf" id="1_dm8f6"]
+[ext_resource type="PackedScene" uid="uid://ddtm12tqidhc8" path="res://entities/PatternPreview.tscn" id="2_x03rf"]
+
+[sub_resource type="GDScript" id="GDScript_x03rf"]
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="PatternMenu" type="Control" unique_id=1642518429]
+layout_mode = 3
+anchors_preset = 0
+script = SubResource("GDScript_x03rf")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1243308770]
+layout_mode = 0
+offset_right = 1144.0
+offset_bottom = 648.0
+color = Color(1, 0.8352941, 1, 1)
+
+[node name="Title" type="Label" parent="." unique_id=1851861411]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 40.0
+offset_right = 906.0
+offset_bottom = 147.0
+theme_override_colors/font_color = Color(0.87920475, 0.00061896147, 0.8791987, 1)
+theme_override_fonts/font = ExtResource("1_dm8f6")
+theme_override_font_sizes/font_size = 60
+text = "Elegi tu molde"
+horizontal_alignment = 1
+
+[node name="PatternPreview" parent="." unique_id=34197901 instance=ExtResource("2_x03rf")]
+position = Vector2(58, 138)

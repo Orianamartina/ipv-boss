@@ -1,0 +1,12 @@
+extends Control
+
+@onready var greetingLabel = $Greeting
+
+func _ready() -> void:
+	Global.player_name_changed.connect(_on_player_name_changed)
+
+func _on_player_name_changed(new_name: String) -> void:
+	greetingLabel.text = "Hola, " + new_name + "!"
+	
+func _on_start_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://UI/PatternMenu.tscn")
