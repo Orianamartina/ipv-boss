@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c2un47q3kxo26"]
+
+[ext_resource type="Texture2D" uid="uid://dv6i52wb5vss1" path="res://Assets/cursor/scisorCursor.webp" id="1_ng5mu"]
+
+[node name="ScissorsCursor" type="Node2D" unique_id=504322664]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1272218712]
+rotation = 0.7086037
+scale = Vector2(0.1, 0.098)
+texture = ExtResource("1_ng5mu")

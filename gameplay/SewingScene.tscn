@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dfusxel5kap8g"]
+
+[ext_resource type="Script" uid="uid://bmvkksnxc4ms6" path="res://gameplay/sewing_scene.gd" id="1_sew01"]
+[ext_resource type="PackedScene" uid="uid://x6unls07c6d2" path="res://gameplay/CutPattern.tscn" id="2_sew01"]
+[ext_resource type="PackedScene" uid="uid://ch7o43no4ex04" path="res://UI/Score.tscn" id="3_sew01"]
+[ext_resource type="FontFile" uid="uid://chv31ikip8n7g" path="res://UI/fonts/Chewy-Regular.ttf" id="4_sew01"]
+
+[node name="SewingScene" type="Node2D" unique_id=1535528604]
+script = ExtResource("1_sew01")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=615296353]
+offset_right = 1149.0
+offset_bottom = 645.0
+color = Color(1, 0.63529414, 1, 1)
+
+[node name="Pattern" parent="." unique_id=1281497494 instance=ExtResource("2_sew01")]
+scale = Vector2(2, 2)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1000000002]
+
+[node name="Needle" type="CanvasLayer" parent="." unique_id=1000000003]
+
+[node name="NeedleMarker" type="ColorRect" parent="Needle" unique_id=1000000004]
+offset_left = 569.5
+offset_top = 317.5
+offset_right = 579.5
+offset_bottom = 327.5
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Score" parent="." unique_id=68589671 instance=ExtResource("3_sew01")]
+
+[node name="ResultPanel" type="CanvasLayer" parent="." unique_id=1000000010]
+visible = false
+
+[node name="Background" type="ColorRect" parent="ResultPanel" unique_id=1000000011]
+offset_left = 274.5
+offset_top = 172.5
+offset_right = 874.5
+offset_bottom = 472.5
+color = Color(0.97, 0.85, 0.97, 0.95)
+
+[node name="TitleLabel" type="Label" parent="ResultPanel" unique_id=1000000012]
+offset_left = 274.5
+offset_top = 200.0
+offset_right = 874.5
+offset_bottom = 270.0
+theme_override_fonts/font = ExtResource("4_sew01")
+theme_override_font_sizes/font_size = 52
+text = "Costura terminada!"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="ResultPanel" unique_id=1000000013]
+offset_left = 274.5
+offset_top = 300.0
+offset_right = 874.5
+offset_bottom = 390.0
+theme_override_fonts/font = ExtResource("4_sew01")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="ResultPanel" unique_id=1000000015]
+offset_left = 374.5
+offset_top = 400.0
+offset_right = 774.5
+offset_bottom = 460.0
+theme_override_fonts/font = ExtResource("4_sew01")
+theme_override_font_sizes/font_size = 40
+text = "Ver resultado"
+
+[connection signal="pressed" from="ResultPanel/ContinueButton" to="." method="_on_continue_pressed"]

@@ -7,6 +7,8 @@ func _ready() -> void:
 
 
 func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://gameplay/SewingScene.tscn")
+
 	var new_name = $LineEdit.text.strip_edges()
 	if new_name.length() > 0:
 		Global.set_player_name(new_name)

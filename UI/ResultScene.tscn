@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://c4pwoj8cgjc8r"]
+
+[ext_resource type="Script" path="res://UI/result_scene.gd" id="1_res01"]
+[ext_resource type="FontFile" uid="uid://chv31ikip8n7g" path="res://UI/fonts/Chewy-Regular.ttf" id="2_res01"]
+[ext_resource type="FontFile" uid="uid://dq2y8l6ab26qm" path="res://Assets/fonts/RougeScript-Regular.ttf" id="3_res01"]
+
+[node name="ResultScene" type="Control" unique_id=495932054]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_res01")
+
+[node name="Background" type="ColorRect" parent="." unique_id=3000000001]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(1, 0.70980394, 1, 1)
+
+[node name="TitleLabel" type="Label" parent="." unique_id=3000000002]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 80.0
+offset_right = 1000.0
+offset_bottom = 200.0
+theme_override_fonts/font = ExtResource("3_res01")
+theme_override_font_sizes/font_size = 100
+text = "Resultado final"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=3000000003]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 240.0
+offset_right = 1000.0
+offset_bottom = 350.0
+theme_override_fonts/font = ExtResource("2_res01")
+theme_override_font_sizes/font_size = 72
+horizontal_alignment = 1
+
+[node name="DetailLabel" type="Label" parent="." unique_id=3000000004]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 360.0
+offset_right = 1000.0
+offset_bottom = 440.0
+theme_override_fonts/font = ExtResource("2_res01")
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1

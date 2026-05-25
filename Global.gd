@@ -24,3 +24,6 @@ func set_pattern(pattern: String) -> void:
 
 func set_fabric(fabric: String) -> void:
 	current_fabric = fabric
+	
+func add_score(new_score:int) -> void:
+	score += new_score
