@@ -20,7 +20,7 @@ color = Color(1, 0.70980394, 1, 1)
 
 [node name="CutPattern" parent="." unique_id=1281497493 instance=ExtResource("3_kbl8x")]
 position = Vector2(567, 299)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.5, 0.5)
 
 [node name="PlayerLine" type="Line2D" parent="." unique_id=1871178758]
 default_color = Color(0, 1, 1, 1)
@@ -58,12 +58,22 @@ theme_override_font_sizes/font_size = 56
 horizontal_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="ResultPanel" unique_id=2000000014]
-offset_left = 374.0
+offset_left = 284.0
 offset_top = 390.0
-offset_right = 774.0
+offset_right = 574.0
 offset_bottom = 460.0
 theme_override_fonts/font = ExtResource("5_cut01")
 theme_override_font_sizes/font_size = 40
 text = "Continuar"
 
+[node name="RetryButton" type="Button" parent="ResultPanel" unique_id=2000000015]
+offset_left = 584.0
+offset_top = 390.0
+offset_right = 874.0
+offset_bottom = 460.0
+theme_override_fonts/font = ExtResource("5_cut01")
+theme_override_font_sizes/font_size = 40
+text = "Reintentar"
+
 [connection signal="pressed" from="ResultPanel/ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="ResultPanel/RetryButton" to="." method="_on_retry_pressed"]

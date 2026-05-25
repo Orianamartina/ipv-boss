@@ -119,11 +119,15 @@ func _finish_cut() -> void:
 	cutting_active = false
 	player_line.add_point(player_line.points[0])  # cerrar visualmente la linea
 	scissors.visible = false
-	Global.add_score(score)
 	var percentage = int(float(score) / float(max_score) * 100.0)
 	result_score_label.text = "%d / %d  (%d%%)" % [score, max_score, percentage]
 	result_panel.visible = true
 
 
 func _on_continue_pressed() -> void:
+	Global.add_score(score)
 	get_tree().change_scene_to_file("res://gameplay/SewingScene.tscn")
+
+
+func _on_retry_pressed() -> void:
+	get_tree().reload_current_scene()

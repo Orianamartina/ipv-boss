@@ -9,7 +9,8 @@ var player_line: Line2D
 
 const MAX_ADVANCE_SPEED := 300.0
 const ROTATION_SPEED := 2.0
-const SCORE_RANGE := 20.0
+const SCORE_RANGE := 10.0
+const POINT_DISTANCE := 5.0
 const FINISH_DISTANCE := 40.0   # distancia a start para considerar que cerro el loop
 const MIN_COMPLETION := 0.85    # debe recorrer al menos el 85% del path antes de poder terminar
 
@@ -65,20 +66,30 @@ func _process(delta: float) -> void:
 			player_line.add_point(local_pos)
 			last_line_point = local_pos
 
+	# color amarillo cuando R2 no esta presionado
+	if throttle <= 0.1:
+		score_label.modulate = Color.YELLOW
+
 	# SCORE y PROGRESO - solo se cuentan mientras R2 este presionado
 	if throttle > 0.1:
 		var local_cam = path.to_local(camera.global_position)
-
-		# trackear progreso sobre el path
 		var current_offset = path.curve.get_closest_offset(local_cam)
+		var prev_progress = max_progress
 		max_progress = maxf(max_progress, current_offset)
+		var offset_advance = max_progress - prev_progress
 
-		# score segun distancia al path
-		var closest = path.curve.get_closest_point(local_cam)
-		var distance = local_cam.distance_to(closest)
-		var normalized = clamp(distance / SCORE_RANGE, 0.0, 1.0)
-		score = maxf(0.0, score + lerp(3.0, -2.0, normalized))
-		score_label.text = "Score: %d / %d" % [int(score), int(max_score)]
+		# score proporcional a cuanto se avanzó sobre el path
+		# evita que movimiento lateral o framerate afecten el puntaje
+		if offset_advance > 0:
+			var closest = path.curve.get_closest_point(local_cam)
+			var distance = local_cam.distance_to(closest)
+			var normalized = clamp(distance / SCORE_RANGE, 0.0, 1.0)
+			# escalar por offset_advance para que 3 pts equivalga a POINT_DISTANCE de avance
+			var local_point_dist = POINT_DISTANCE / path.global_transform.get_scale().x
+			var score_delta = lerp(3.0, -2.0, normalized) * (offset_advance / local_point_dist)
+			score = maxf(0.0, score + score_delta)
+			score_label.text = "Score: %d / %d" % [int(score), int(max_score)]
+			score_label.modulate = Color.GREEN if score_delta > 0 else Color.RED
 
 		# DETECTAR FIN - volvio al inicio habiendo recorrido suficiente del path
 		# el punto de inicio se recalcula cada frame porque el patron puede haber rotado
@@ -99,14 +110,18 @@ func _rotate_pattern_around_needle(angle: float) -> void:
 
 func _finish_sewing() -> void:
 	sewing_active = false
-	Global.add_score(int(score))
 	var percentage = int(score / max_score * 100.0)
 	result_score_label.text = "%d / %d  (%d%%)" % [int(score), int(max_score), percentage]
 	result_panel.visible = true
 
 
 func _on_continue_pressed() -> void:
+	Global.add_score(int(score))
 	get_tree().change_scene_to_file("res://UI/ResultScene.tscn")
+
+
+func _on_retry_pressed() -> void:
+	get_tree().reload_current_scene()
 
 
 func _calculate_max_score() -> float:
