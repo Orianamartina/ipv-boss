@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://b0yd62xlam7ft"]
 
 [ext_resource type="FontFile" uid="uid://d1gbk8j5mjfmv" path="res://Assets/fonts/Chewy-Regular.ttf" id="1_dm8f6"]
-[ext_resource type="PackedScene" uid="uid://ddtm12tqidhc8" path="res://entities/PatternPreview.tscn" id="2_x03rf"]
+[ext_resource type="Texture2D" uid="uid://cpmwjnnpjlw2w" path="res://Assets/patterns/shirt.png" id="3_h3la1"]
+[ext_resource type="Script" uid="uid://ghpfyb864en4" path="res://UI/pattern_btn.gd" id="4_b2eip"]
+[ext_resource type="Texture2D" uid="uid://cvpjvq88twa30" path="res://Assets/patterns/shirt_focus.png" id="4_dp3wm"]
 
 [sub_resource type="GDScript" id="GDScript_x03rf"]
 script/source = "extends Control
@@ -40,5 +42,24 @@ theme_override_font_sizes/font_size = 60
 text = "Elegi tu molde"
 horizontal_alignment = 1
 
-[node name="PatternPreview" parent="." unique_id=34197901 instance=ExtResource("2_x03rf")]
-position = Vector2(58, 138)
+[node name="PatternBtn" type="TextureButton" parent="." unique_id=365040447]
+layout_mode = 0
+offset_left = 57.999996
+offset_top = 138.0
+offset_right = 570.0
+offset_bottom = 650.0
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("3_h3la1")
+texture_focused = ExtResource("4_dp3wm")
+script = ExtResource("4_b2eip")
+
+[node name="PatternBtn2" type="TextureButton" parent="." unique_id=996785199]
+layout_mode = 0
+offset_left = 406.99997
+offset_top = 139.00002
+offset_right = 919.0
+offset_bottom = 651.0
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("3_h3la1")
+texture_focused = ExtResource("4_dp3wm")
+script = ExtResource("4_b2eip")
