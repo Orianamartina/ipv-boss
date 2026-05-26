@@ -7,8 +7,9 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("enter"):
+		_on_pattern_pressed()
 
 func _on_pattern_pressed() -> void:
 	Global.set_pattern(id)

@@ -5,6 +5,10 @@ extends Control
 func _ready() -> void:
 	Global.player_name_changed.connect(_on_player_name_changed)
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("enter"):
+		_on_start_button_pressed()
+
 func _on_player_name_changed(new_name: String) -> void:
 	greetingLabel.text = "Hola, " + new_name + "!"
 	
