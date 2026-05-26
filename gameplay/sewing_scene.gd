@@ -110,6 +110,23 @@ func _rotate_pattern_around_needle(angle: float) -> void:
 
 func _finish_sewing() -> void:
 	sewing_active = false
+	
+	# Calcular el centro del patrón
+	var pattern_center = $Pattern.global_position
+	
+	# Animar zoom out, centrado y derecho
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(Tween.EASE_OUT)
+	
+	# Animar simultáneamente: cámara al centro, zoom out, y rotación a 0
+	tween.tween_property(camera, "global_position", pattern_center, 1.5)
+	tween.parallel().tween_property(camera, "zoom", Vector2(0.3, 0.3), 1.5)
+	tween.parallel().tween_property($Pattern, "rotation", 0.0, 1.5)
+	tween.tween_callback(_show_result_panel)
+
+
+func _show_result_panel() -> void:
 	var percentage = int(score / max_score * 100.0)
 	result_score_label.text = "%d / %d  (%d%%)" % [int(score), int(max_score), percentage]
 	result_panel.visible = true

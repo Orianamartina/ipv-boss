@@ -30,6 +30,7 @@ var cutting_active := true
 
 func _ready() -> void:
 	scissors_position = scissors.global_position
+	last_point = scissors_position
 	max_score = _calculate_max_score()
 	score_label.text = "Score: 0 / %d" % max_score
 
@@ -74,11 +75,11 @@ func _process(delta: float) -> void:
 
 	# CORTAR - inicio de cada corte
 	if Input.is_action_just_pressed("cut"):
-		player_line.add_point(scissors_position)
 		last_point = scissors_position
+		return
 
 	# CORTAR - mientras se mantiene X
-	elif Input.is_action_pressed("cut"):
+	if Input.is_action_pressed("cut"):
 		if scissors_position.distance_to(last_point) > POINT_DISTANCE:
 
 			# DETECTAR CIERRE: si toca un segmento ya dibujado → loop cerrado
