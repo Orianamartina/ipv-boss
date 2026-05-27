@@ -31,7 +31,7 @@ func _ready() -> void:
 
 	var cut_pattern_scene := preload("res://gameplay/CutPattern.tscn")
 	pattern_instance = cut_pattern_scene.instantiate()
-	pattern_instance.scale = Vector2(2, 2)
+	pattern_instance.scale = Vector2(3, 3)
 	add_child(pattern_instance)
 
 	path = pattern_instance.get_node("PatternPath")

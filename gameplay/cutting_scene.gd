@@ -21,9 +21,12 @@ const PENALTY_PER_STEP := 5.0
 
 var max_score: int = 5000
 var score: float = 0.0
-var max_progress: float = 0.0
 var total_path_length: float = 0.0
 var cutting_active := true
+var cut_initialized := false
+var accumulated_offset: float = 0.0
+var max_accumulated: float = 0.0
+var prev_raw_offset: float = 0.0
 var scissors_position := Vector2.ZERO
 var velocity := Vector2.ZERO
 var last_point := Vector2.ZERO
@@ -36,7 +39,7 @@ func _ready() -> void:
 	var cut_pattern_scene := preload("res://gameplay/CutPattern.tscn")
 	pattern = cut_pattern_scene.instantiate()
 	pattern.position = Vector2(567, 350)
-	pattern.scale = Vector2(0.5, 0.5)
+	pattern.scale = Vector2(1, 1)
 	add_child(pattern)
 	move_child(pattern, 3)
 
@@ -89,8 +92,6 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("cut"):
 		last_point = scissors_position
-		var local_start: Vector2 = path.to_local(scissors_position)
-		max_progress = path.curve.get_closest_offset(local_start)
 		return
 
 	if Input.is_action_pressed("cut"):
@@ -104,11 +105,31 @@ func _process(delta: float) -> void:
 			var closest_point: Vector2 = path.curve.get_closest_point(local_scissors)
 			var distance: float = local_scissors.distance_to(closest_point)
 			var accuracy: float = 1.0 - clamp(distance / PERFECT_RANGE, 0.0, 1.0)
-
 			var current_offset: float = path.curve.get_closest_offset(local_scissors)
-			var prev_progress: float = max_progress
-			max_progress = maxf(max_progress, current_offset)
-			var offset_advance: float = max_progress - prev_progress
+
+			if not cut_initialized:
+				if accuracy > 0.0:
+					cut_initialized = true
+					prev_raw_offset = current_offset
+					accumulated_offset = 0.0
+					max_accumulated = 0.0
+				player_line.add_point(scissors_position)
+				last_point = scissors_position
+				return
+
+			# Progreso relativo: detecta cruce del nudo (salto grande en offset)
+			var raw_delta: float = current_offset - prev_raw_offset
+			if raw_delta < -total_path_length * 0.5:
+				raw_delta += total_path_length   # cruzó el nudo hacia adelante
+			elif raw_delta > total_path_length * 0.5:
+				raw_delta -= total_path_length   # cruzó el nudo hacia atrás
+			prev_raw_offset = current_offset
+
+			if raw_delta > 0.0:
+				accumulated_offset = minf(accumulated_offset + raw_delta, total_path_length)
+			var prev_max: float = max_accumulated
+			max_accumulated = maxf(max_accumulated, accumulated_offset)
+			var offset_advance: float = max_accumulated - prev_max
 
 			if accuracy > 0.0 and offset_advance > 0.0:
 				var score_delta: float = (offset_advance / total_path_length) * float(max_score) * accuracy

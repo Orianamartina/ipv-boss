@@ -12,4 +12,3 @@ display_name = "Remera"
 button_texture = ExtResource("2_tex_normal")
 button_focus_texture = ExtResource("3_tex_focus")
 path_scene = ExtResource("4_shape")
-max_score = 5000
