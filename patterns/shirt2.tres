@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PatternData" format=3 uid="uid://0vkc0gpv5t15"]
+
+[ext_resource type="Texture2D" uid="uid://cvpjvq88twa30" path="res://Assets/patterns/shirt_focus.png" id="1_jd7u5"]
+[ext_resource type="Texture2D" uid="uid://cpmwjnnpjlw2w" path="res://Assets/patterns/shirt.png" id="2_bdk2h"]
+[ext_resource type="Script" uid="uid://btee1yfi58ghw" path="res://gameplay/pattern_data.gd" id="3_tg6g7"]
+
+[sub_resource type="Curve2D" id="1_curve"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -305, -307, 0, 0, 0, 0, -247, -348, 0, 0, 0, 0, 248, -346, 0, 0, 0, 0, 302, -308, 0, 0, 0, 0, 341, -250, 0, 0, 0, 0, 346, 229, 0, 0, 0, 0, 320, 302, 0, 0, 0, 0, 225, 346, 0, 0, 0, 0, -230, 347, 0, 0, 0, 0, -301, 311, 0, 0, 0, 0, -347, 232, 0, 0, 0, 0, -349, -234, 0, 0, 0, 0, -305, -307)
+}
+point_count = 13
+
+[resource]
+script = ExtResource("3_tg6g7")
+id = "shirt-2"
+display_name = "Remera"
+button_texture = ExtResource("2_bdk2h")
+button_focus_texture = ExtResource("1_jd7u5")
+curve = SubResource("1_curve")

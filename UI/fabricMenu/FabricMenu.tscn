@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://4cwi8i5gw58l"]
 
 [ext_resource type="FontFile" uid="uid://d1gbk8j5mjfmv" path="res://Assets/fonts/Chewy-Regular.ttf" id="1_e116d"]
-[ext_resource type="Script" uid="uid://cfjnq3vjm0vrj" path="res://UI/fabricMenu/fabric_menu.gd" id="2_6hmhc"]
-[ext_resource type="Texture2D" uid="uid://b20fdfgny7xc5" path="res://Assets/fabric/fabric.png" id="3_wgep1"]
-[ext_resource type="Script" uid="uid://drrlvtjume1l7" path="res://UI/fabricMenu/fabric_button.gd" id="4_6hmhc"]
-[ext_resource type="Texture2D" uid="uid://bvyesbkvsunro" path="res://Assets/fabric/fabric_focus.png" id="4_wgep1"]
+[ext_resource type="Script" path="res://UI/fabricMenu/fabric_menu.gd" id="2_6hmhc"]
+[ext_resource type="Script" path="res://UI/fabricMenu/fabric_button.gd" id="3_btn"]
+[ext_resource type="Resource" path="res://fabrics/fabric-1.tres" id="4_fab1"]
+[ext_resource type="Resource" path="res://fabrics/fabric-2.tres" id="5_fab2"]
+[ext_resource type="Resource" path="res://fabrics/fabric-3.tres" id="6_fab3"]
 
-[node name="FabricMenu" type="Control" unique_id=1877809663]
+[node name="FabricMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,13 +16,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_6hmhc")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1594563667]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 1146.0
 offset_bottom = 638.0
 color = Color(1, 0.8392157, 1, 1)
 
-[node name="Title" type="Label" parent="." unique_id=705076213]
+[node name="Title" type="Label" parent="."]
 layout_mode = 0
 offset_left = 251.0
 offset_top = 24.0
@@ -32,43 +33,36 @@ theme_override_fonts/font = ExtResource("1_e116d")
 theme_override_font_sizes/font_size = 60
 text = "Elegi una tela"
 horizontal_alignment = 1
-script = ExtResource("2_6hmhc")
 
-[node name="TextureButton3" type="TextureButton" parent="." unique_id=1919082935]
-layout_mode = 0
-offset_left = 833.0
-offset_top = 208.0
-offset_right = 1064.0
-offset_bottom = 427.0
-texture_normal = ExtResource("3_wgep1")
-texture_focused = ExtResource("4_wgep1")
-ignore_texture_size = true
-stretch_mode = 4
-script = ExtResource("4_6hmhc")
-button_id = "1"
-
-[node name="TextureButton2" type="TextureButton" parent="." unique_id=1642333770]
-layout_mode = 0
-offset_left = 464.0
-offset_top = 206.0
-offset_right = 695.0
-offset_bottom = 425.0
-texture_normal = ExtResource("3_wgep1")
-texture_focused = ExtResource("4_wgep1")
-ignore_texture_size = true
-stretch_mode = 4
-script = ExtResource("4_6hmhc")
-button_id = "2"
-
-[node name="TextureButton" type="TextureButton" parent="." unique_id=1448086366]
+[node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 96.0
-offset_top = 211.0
-offset_right = 327.0
-offset_bottom = 430.0
-texture_normal = ExtResource("3_wgep1")
-texture_focused = ExtResource("4_wgep1")
+offset_top = 160.0
+offset_right = 390.0
+offset_bottom = 500.0
 ignore_texture_size = true
-stretch_mode = 4
-script = ExtResource("4_6hmhc")
-button_id = "3"
+stretch_mode = 6
+script = ExtResource("3_btn")
+fabric_data = ExtResource("4_fab1")
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 160.0
+offset_right = 724.0
+offset_bottom = 500.0
+ignore_texture_size = true
+stretch_mode = 6
+script = ExtResource("3_btn")
+fabric_data = ExtResource("5_fab2")
+
+[node name="TextureButton3" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 160.0
+offset_right = 1058.0
+offset_bottom = 500.0
+ignore_texture_size = true
+stretch_mode = 6
+script = ExtResource("3_btn")
+fabric_data = ExtResource("6_fab3")

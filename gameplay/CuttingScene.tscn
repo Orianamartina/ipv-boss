@@ -2,11 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d0mmodt4vp4pt" path="res://gameplay/cutting_scene.gd" id="1_8fysm"]
 [ext_resource type="PackedScene" uid="uid://c2un47q3kxo26" path="res://gameplay/ScissorsCursor.tscn" id="2_icwa2"]
-[ext_resource type="PackedScene" uid="uid://x6unls07c6d2" path="res://gameplay/CutPattern.tscn" id="3_kbl8x"]
-[ext_resource type="PackedScene" uid="uid://bwtplbct3sfvm" path="res://gameplay/CutPatternTShirt.tscn" id="4_0csdl"]
 [ext_resource type="PackedScene" uid="uid://ch7o43no4ex04" path="res://UI/Score.tscn" id="4_e5pjn"]
-[ext_resource type="FontFile" uid="uid://chv31ikip8n7g" path="res://UI/fonts/Chewy-Regular.ttf" id="5_cut01"]
-[ext_resource type="Script" uid="uid://djpe8bo7frrl5" path="res://gameplay/cut_pattern_t_shirt.gd" id="5_yd5ve"]
+[ext_resource type="PackedScene" uid="uid://cwwshcfrjt8nm" path="res://UI/result_panel.tscn" id="5_result"]
 
 [node name="CuttingScene" type="Node2D" unique_id=2005483906]
 script = ExtResource("1_8fysm")
@@ -20,67 +17,10 @@ color = Color(1, 0.70980394, 1, 1)
 
 [node name="Fabric" type="Sprite2D" parent="." unique_id=1224635060]
 
-[node name="CutPattern" parent="." unique_id=1281497493 instance=ExtResource("3_kbl8x")]
-visible = false
-position = Vector2(567, 299)
-scale = Vector2(0.5, 0.5)
-
-[node name="CutPatternTShirt" parent="." unique_id=1258628882 instance=ExtResource("4_0csdl")]
-position = Vector2(558, 303)
-script = ExtResource("5_yd5ve")
-
 [node name="PlayerLine" type="Line2D" parent="." unique_id=1871178758]
 default_color = Color(0, 1, 1, 1)
 
 [node name="ScissorsCursor" parent="." unique_id=504322664 instance=ExtResource("2_icwa2")]
 position = Vector2(558, 298)
 
-[node name="ResultPanel" type="CanvasLayer" parent="." unique_id=2000000010]
-visible = false
-
-[node name="Background" type="ColorRect" parent="ResultPanel" unique_id=2000000011]
-offset_left = 274.0
-offset_top = 171.0
-offset_right = 874.0
-offset_bottom = 471.0
-color = Color(0.97, 0.85, 0.97, 0.95)
-
-[node name="TitleLabel" type="Label" parent="ResultPanel" unique_id=2000000012]
-offset_left = 274.0
-offset_top = 200.0
-offset_right = 874.0
-offset_bottom = 270.0
-theme_override_fonts/font = ExtResource("5_cut01")
-theme_override_font_sizes/font_size = 52
-text = "Corte terminado!"
-horizontal_alignment = 1
-
-[node name="ScoreLabel" type="Label" parent="ResultPanel" unique_id=2000000013]
-offset_left = 274.0
-offset_top = 290.0
-offset_right = 874.0
-offset_bottom = 370.0
-theme_override_fonts/font = ExtResource("5_cut01")
-theme_override_font_sizes/font_size = 56
-horizontal_alignment = 1
-
-[node name="ContinueButton" type="Button" parent="ResultPanel" unique_id=2000000014]
-offset_left = 284.0
-offset_top = 390.0
-offset_right = 574.0
-offset_bottom = 460.0
-theme_override_fonts/font = ExtResource("5_cut01")
-theme_override_font_sizes/font_size = 40
-text = "Continuar"
-
-[node name="RetryButton" type="Button" parent="ResultPanel" unique_id=2000000015]
-offset_left = 584.0
-offset_top = 390.0
-offset_right = 874.0
-offset_bottom = 460.0
-theme_override_fonts/font = ExtResource("5_cut01")
-theme_override_font_sizes/font_size = 40
-text = "Reintentar"
-
-[connection signal="pressed" from="ResultPanel/ContinueButton" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="ResultPanel/RetryButton" to="." method="_on_retry_pressed"]
+[node name="ResultPanel" parent="." unique_id=1733871843 instance=ExtResource("5_result")]

@@ -1,24 +1,27 @@
 [gd_scene format=3 uid="uid://b0yd62xlam7ft"]
 
 [ext_resource type="FontFile" uid="uid://d1gbk8j5mjfmv" path="res://Assets/fonts/Chewy-Regular.ttf" id="1_dm8f6"]
-[ext_resource type="Texture2D" uid="uid://cpmwjnnpjlw2w" path="res://Assets/patterns/shirt.png" id="3_h3la1"]
-[ext_resource type="Script" uid="uid://ghpfyb864en4" path="res://UI/pattern_btn.gd" id="4_b2eip"]
-[ext_resource type="Texture2D" uid="uid://cvpjvq88twa30" path="res://Assets/patterns/shirt_focus.png" id="4_dp3wm"]
+[ext_resource type="Script" uid="uid://rmjf8jphowpv" path="res://UI/pattern_menu.gd" id="5_pattern_menu"]
 
-[ext_resource type="Script" uid="uid://pattern_menu_script" path="res://UI/pattern_menu.gd" id="5_pattern_menu"]
-
-[node name="PatternMenu" type="Control" unique_id=1642518429]
+[node name="PatternMenu" type="Control" unique_id=1953787907]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5_pattern_menu")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1243308770]
-layout_mode = 0
-offset_right = 1144.0
-offset_bottom = 648.0
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1116755357]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(1, 0.8352941, 1, 1)
 
-[node name="Title" type="Label" parent="." unique_id=1851861411]
+[node name="Title" type="Label" parent="." unique_id=682359158]
 layout_mode = 0
 offset_left = 269.0
 offset_top = 40.0
@@ -30,24 +33,11 @@ theme_override_font_sizes/font_size = 60
 text = "Elegi tu molde"
 horizontal_alignment = 1
 
-[node name="PatternBtn" type="TextureButton" parent="." unique_id=365040447]
+[node name="ButtonsContainer" type="HBoxContainer" parent="." unique_id=1396332134]
 layout_mode = 0
-offset_left = 57.999996
-offset_top = 138.0
-offset_right = 570.0
-offset_bottom = 650.0
-scale = Vector2(0.7, 0.7)
-texture_normal = ExtResource("3_h3la1")
-texture_focused = ExtResource("4_dp3wm")
-script = ExtResource("4_b2eip")
-
-[node name="PatternBtn2" type="TextureButton" parent="." unique_id=996785199]
-layout_mode = 0
-offset_left = 406.99997
-offset_top = 139.00002
-offset_right = 919.0
-offset_bottom = 651.0
-scale = Vector2(0.7, 0.7)
-texture_normal = ExtResource("3_h3la1")
-texture_focused = ExtResource("4_dp3wm")
-script = ExtResource("4_b2eip")
+offset_left = 72.0
+offset_top = 155.0
+offset_right = 1072.0
+offset_bottom = 620.0
+theme_override_constants/separation = 40
+alignment = 1
