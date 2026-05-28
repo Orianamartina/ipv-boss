@@ -42,6 +42,10 @@ func _ready() -> void:
 	var start_local: Vector2 = path.curve.get_baked_points()[0]
 	camera.global_position = path.to_global(start_local)
 
+	var center := get_viewport_rect().size / 2.0
+	$Needle/Sprite2D.position = center - Vector2(0, 100)
+	$Needle/NeedleMarker.position = center - Vector2(5, 5)
+
 	_create_fabric_polygon()
 
 	player_line = Line2D.new()
