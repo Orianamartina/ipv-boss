@@ -14,5 +14,5 @@ func _ready() -> void:
 	line.points = path.curve.get_baked_points()
 
 	var sprite := get_node_or_null("Sprite2D")
-	if sprite and Global.current_pattern != null and Global.current_pattern.button_texture != null:
-		sprite.texture = Global.current_pattern.button_texture
+	if sprite and Global.current_pattern != null and Global.current_pattern.pattern_texture != null:
+		sprite.texture = Global.current_pattern.pattern_texture
