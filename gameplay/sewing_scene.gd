@@ -3,6 +3,7 @@ extends Node2D
 @onready var camera: Camera2D = $Camera2D
 @onready var score_label: Label = $Score/ScoreLabel
 @onready var result_panel: ResultPanel = $ResultPanel
+@onready var wood_background: Sprite2D = $WoodBackground
 
 var player_line: Line2D
 var pattern_instance: Node2D
@@ -49,8 +50,11 @@ func _ready() -> void:
 	_create_fabric_polygon()
 
 	player_line = Line2D.new()
-	player_line.width = 3.0
-	player_line.default_color = Color(0.2, 0.2, 0.8, 0.8)
+	player_line.width = 12.0
+	player_line.default_color = Color(1, 1, 1, 1)
+	player_line.texture = preload("res://Assets/UI/stiches.png")
+	player_line.texture_mode = Line2D.LINE_TEXTURE_TILE
+	player_line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	pattern_instance.add_child(player_line)
 
 	result_panel.setup("Costura terminada!", "Ver resultado")
@@ -152,6 +156,10 @@ func _rotate_pattern_around_needle(angle: float) -> void:
 	var offset := pattern_instance.global_position - pivot
 	pattern_instance.global_position = pivot + offset.rotated(angle)
 	pattern_instance.rotation += angle
+	var bg_offset := wood_background.global_position - pivot
+	wood_background.global_position = pivot + bg_offset.rotated(angle)
+	wood_background.rotation += angle
+
 
 
 func _finish_sewing() -> void:
@@ -166,6 +174,7 @@ func _finish_sewing() -> void:
 	tween.tween_property(camera, "global_position", pattern_center, 1.5)
 	tween.parallel().tween_property(camera, "zoom", Vector2(0.3, 0.3), 1.5)
 	tween.parallel().tween_property(pattern_instance, "rotation", 0.0, 1.5)
+	tween.parallel().tween_property(wood_background, "rotation", 0.0, 1.5)
 	tween.tween_callback(_show_result_panel)
 
 
