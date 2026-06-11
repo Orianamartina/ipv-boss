@@ -4,7 +4,7 @@ const BTN_SCRIPT := preload("res://UI/pattern_btn.gd")
 
 const PATTERNS: Array[String] = [
 	"res://patterns/shirt.tres",
-	"res://patterns/shirt2.tres",
+	"res://patterns/pants.tres",
 ]
 
 func _ready() -> void:

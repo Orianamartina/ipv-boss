@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PatternData" format=3 uid="uid://0vkc0gpv5t15"]
+
+[ext_resource type="Texture2D" uid="uid://bs61o0tapsjxp" path="res://Assets/patterns/patron02/patron02-focus.svg" id="1_ogx71"]
+[ext_resource type="Texture2D" uid="uid://dd1yjd5svrc0t" path="res://Assets/patterns/patron02/patron02-molde.svg" id="2_76hh2"]
+[ext_resource type="PackedScene" uid="uid://cr586vlo0u7h3" path="res://patterns/shapes/PantsPath.tscn" id="3_ogx71"]
+[ext_resource type="Texture2D" uid="uid://vcexeeba5846" path="res://Assets/patterns/patron02/patron02-final.svg" id="4_0yf0s"]
+[ext_resource type="Texture2D" uid="uid://cpg7lxt5aar6s" path="res://Assets/patterns/patron02/patron02-minijuego.svg" id="5_tfaji"]
+[ext_resource type="Script" uid="uid://btee1yfi58ghw" path="res://gameplay/pattern_data.gd" id="6_is2yw"]
+
+[resource]
+script = ExtResource("6_is2yw")
+id = "pants"
+display_name = "Pantalones"
+button_texture = ExtResource("2_76hh2")
+pattern_texture = ExtResource("5_tfaji")
+button_focus_texture = ExtResource("1_ogx71")
+pattern_final_texture = ExtResource("4_0yf0s")
+path_scene = ExtResource("3_ogx71")
