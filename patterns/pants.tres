@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PatternData" format=3 uid="uid://0vkc0gpv5t15"]
+
+[ext_resource type="Texture2D" uid="uid://byxjfdkqvr8ha" path="res://Assets/patterns/patron02/patron02-focus.svg" id="1_ogx71"]
+[ext_resource type="Texture2D" uid="uid://crdi7bgjx1hp" path="res://Assets/patterns/patron02/patron02-molde.svg" id="2_76hh2"]
+[ext_resource type="PackedScene" uid="uid://cr586vlo0u7h3" path="res://patterns/shapes/PantsPath.tscn" id="3_ogx71"]
+[ext_resource type="Texture2D" uid="uid://r5osxa13v2ey" path="res://Assets/patterns/patron02/patron02-final.svg" id="4_0yf0s"]
+[ext_resource type="Script" uid="uid://btee1yfi58ghw" path="res://gameplay/pattern_data.gd" id="6_is2yw"]
+
+[resource]
+script = ExtResource("6_is2yw")
+id = "pants"
+display_name = "Pantalones"
+button_texture = ExtResource("2_76hh2")
+pattern_texture = ExtResource("4_0yf0s")
+button_focus_texture = ExtResource("1_ogx71")
+pattern_final_texture = ExtResource("4_0yf0s")
+path_scene = ExtResource("3_ogx71")
+texture_rotation_degrees = 90.0

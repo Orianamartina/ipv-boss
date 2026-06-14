@@ -1,17 +1,24 @@
 [gd_scene format=3 uid="uid://dfusxel5kap8g"]
 
 [ext_resource type="Script" uid="uid://bmvkksnxc4ms6" path="res://gameplay/sewing_scene.gd" id="1_sew01"]
+[ext_resource type="Texture2D" uid="uid://c08fpq0ymj1hf" path="res://Assets/UI/wood.jpeg" id="2_sopsa"]
 [ext_resource type="PackedScene" uid="uid://ch7o43no4ex04" path="res://UI/Score.tscn" id="3_sew01"]
 [ext_resource type="Texture2D" uid="uid://cawle08jybhmx" path="res://Assets/UI/sewing-needle.png" id="3_sopsa"]
 [ext_resource type="PackedScene" uid="uid://cwwshcfrjt8nm" path="res://UI/result_panel.tscn" id="4_i34do"]
+[ext_resource type="PackedScene" uid="uid://bjbxjm0r4ijg5" path="res://UI/controls/controls.tscn" id="4_lta2n"]
+[ext_resource type="Texture2D" uid="uid://coetsuxk88eyo" path="res://Assets/UI/controls/joystick-sewing-scene.png" id="5_u1q48"]
+[ext_resource type="Texture2D" uid="uid://deu30v1tjd87q" path="res://Assets/UI/controls/joystick-sewing-scene-2.png" id="6_t2dka"]
 
 [node name="SewingScene" type="Node2D" unique_id=1535528604]
 script = ExtResource("1_sew01")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=615296353]
-offset_right = 1149.0
-offset_bottom = 645.0
-color = Color(1, 0.63529414, 1, 1)
+[node name="WoodBackground" type="Sprite2D" parent="." unique_id=633659277]
+texture_repeat = 2
+position = Vector2(30.999939, 26.000061)
+scale = Vector2(0.50538886, 0.54527783)
+texture = ExtResource("2_sopsa")
+region_enabled = true
+region_rect = Rect2(-4500, -4500, 9000, 9000)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1000000002]
 
@@ -29,6 +36,17 @@ offset_top = 317.5
 offset_right = 579.5
 offset_bottom = 327.5
 color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Controls" parent="Needle" unique_id=816335834 instance=ExtResource("4_lta2n")]
+anchors_preset = -1
+offset_left = 30.0
+offset_top = 490.0
+offset_right = 30.0
+offset_bottom = 490.0
+grow_vertical = 2
+scale = Vector2(0.16, 0.16)
+image_a = ExtResource("5_u1q48")
+image_b = ExtResource("6_t2dka")
 
 [node name="Score" parent="." unique_id=68589671 instance=ExtResource("3_sew01")]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnhc4ubjxsfh1"
-path="res://.godot/imported/patron01-focus.svg-6b544d13418a7dbd4cdda8af849be7bf.ctex"
+uid="uid://r5osxa13v2ey"
+path="res://.godot/imported/patron02-final.svg-4768587aa3cfe86300d6921803590d6c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/patterns/patron01/patron01-focus.svg"
-dest_files=["res://.godot/imported/patron01-focus.svg-6b544d13418a7dbd4cdda8af849be7bf.ctex"]
+source_file="res://Assets/patterns/patron02/patron02-final.svg"
+dest_files=["res://.godot/imported/patron02-final.svg-4768587aa3cfe86300d6921803590d6c.ctex"]
 
 [params]
 
@@ -38,6 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=3
+svg/scale=3.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

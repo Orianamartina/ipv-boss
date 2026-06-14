@@ -12,8 +12,9 @@ var path: Path2D
 const SCORE_AREA_HEIGHT := 80.0
 const FABRIC_TILE_SCALE := 0.35
 
-const PERFECT_RANGE := 20.0
-const MAX_SPEED := 500.0
+const PERFECT_RANGE := 40.0
+const MAX_SPEED := 200.0
+const MAX_SPEED_CUTTING := 100.0
 const ACCELERATION := 8.0
 const POINT_DISTANCE := 5.0
 const OVERLAP_DISTANCE := 10.0
@@ -30,6 +31,7 @@ var prev_raw_offset: float = 0.0
 var scissors_position := Vector2.ZERO
 var velocity := Vector2.ZERO
 var last_point := Vector2.ZERO
+var cutting_direction: float = 0.0
 
 
 func _ready() -> void:
@@ -80,7 +82,8 @@ func _setup_fabric_background() -> void:
 func _process(delta: float) -> void:
 	var input_vector := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	velocity = velocity.lerp(input_vector * MAX_SPEED, ACCELERATION * delta)
+	var current_max_speed := MAX_SPEED_CUTTING if Input.is_action_pressed("cut") else MAX_SPEED
+	velocity = velocity.lerp(input_vector * current_max_speed, ACCELERATION * delta)
 	scissors_position += velocity * delta
 	scissors.global_position = scissors_position
 
@@ -113,6 +116,7 @@ func _process(delta: float) -> void:
 					prev_raw_offset = current_offset
 					accumulated_offset = 0.0
 					max_accumulated = 0.0
+					cutting_direction = 0.0
 				player_line.add_point(scissors_position)
 				last_point = scissors_position
 				return
@@ -120,13 +124,17 @@ func _process(delta: float) -> void:
 			# Progreso relativo: detecta cruce del nudo (salto grande en offset)
 			var raw_delta: float = current_offset - prev_raw_offset
 			if raw_delta < -total_path_length * 0.5:
-				raw_delta += total_path_length   # cruzó el nudo hacia adelante
+				raw_delta += total_path_length
 			elif raw_delta > total_path_length * 0.5:
-				raw_delta -= total_path_length   # cruzó el nudo hacia atrás
+				raw_delta -= total_path_length
 			prev_raw_offset = current_offset
 
-			if raw_delta > 0.0:
-				accumulated_offset = minf(accumulated_offset + raw_delta, total_path_length)
+			if cutting_direction == 0.0 and abs(raw_delta) > 0.5:
+				cutting_direction = sign(raw_delta)
+
+			var progress_delta: float = raw_delta * cutting_direction
+			if progress_delta > 0.0:
+				accumulated_offset = minf(accumulated_offset + progress_delta, total_path_length)
 			var prev_max: float = max_accumulated
 			max_accumulated = maxf(max_accumulated, accumulated_offset)
 			var offset_advance: float = max_accumulated - prev_max

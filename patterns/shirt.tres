@@ -18,3 +18,4 @@ pattern_texture = ExtResource("4_4koeh")
 button_focus_texture = ExtResource("1_ws138")
 pattern_final_texture = ExtResource("4_cxskh")
 path_scene = ExtResource("3_ws138")
+texture_scale = 0.3

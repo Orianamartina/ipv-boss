@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bjbxjm0r4ijg5"]
+
+[ext_resource type="Script" uid="uid://bsi1lyltm781t" path="res://UI/controls/controls.gd" id="1_8pg06"]
+
+[node name="Controls" type="Control" unique_id=816335834]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8pg06")
+
+[node name="Image" type="TextureRect" parent="." unique_id=1205844840]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Timer" type="Timer" parent="." unique_id=1740555212]

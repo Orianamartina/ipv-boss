@@ -1,21 +1,14 @@
 [gd_scene format=3 uid="uid://x6unls07c6d2"]
 
 [ext_resource type="Script" uid="uid://bx473px7lbr5t" path="res://gameplay/cut_pattern.gd" id="1_37q1x"]
-[ext_resource type="Texture2D" uid="uid://2uwssbqp8oas" path="res://Assets/patterns/basePattern.webp" id="1_defm3"]
 [ext_resource type="Texture2D" uid="uid://cteutuqhi32io" path="res://Assets/UI/red-line.webp" id="3_37q1x"]
 
 [sub_resource type="Curve2D" id="Curve2D_hemq2"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -305, -307, 0, 0, 0, 0, -247, -348, 0, 0, 0, 0, 248, -346, 0, 0, 0, 0, 302, -308, 0, 0, 0, 0, 341, -250, 0, 0, 0, 0, 346, 229, 0, 0, 0, 0, 320, 302, 0, 0, 0, 0, 225, 346, 0, 0, 0, 0, -230, 347, 0, 0, 0, 0, -301, 311, 0, 0, 0, 0, -347, 232, 0, 0, 0, 0, -349, -234, 0, 0, 0, 0, -305, -307)
-}
-point_count = 13
 
 [node name="CutPattern" type="Node2D" unique_id=1281497493]
 script = ExtResource("1_37q1x")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=458765986]
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("1_defm3")
 
 [node name="PatternPath" type="Path2D" parent="." unique_id=700616210]
 curve = SubResource("Curve2D_hemq2")

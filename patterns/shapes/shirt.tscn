@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://shirt_shape_001"]
+[gd_scene format=3 uid="uid://b30obago75ej3"]
 
 [sub_resource type="Curve2D" id="Curve2D_shirt"]
 _data = {
@@ -6,5 +6,5 @@ _data = {
 }
 point_count = 40
 
-[node name="ShirtShape" type="Path2D"]
+[node name="ShirtShape" type="Path2D" unique_id=826067867]
 curve = SubResource("Curve2D_shirt")
