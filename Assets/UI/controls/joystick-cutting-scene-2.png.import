@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpg7lxt5aar6s"
-path="res://.godot/imported/patron02-minijuego.svg-04c5fb0b3d231669755d4ec4b5f9829d.ctex"
+uid="uid://djrfs7w1txkro"
+path="res://.godot/imported/joystick-cutting-scene-2.png-22c29af19f3234820b0212e3519f6786.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/patterns/patron02/patron02-minijuego.svg"
-dest_files=["res://.godot/imported/patron02-minijuego.svg-04c5fb0b3d231669755d4ec4b5f9829d.ctex"]
+source_file="res://Assets/UI/controls/joystick-cutting-scene-2.png"
+dest_files=["res://.godot/imported/joystick-cutting-scene-2.png-22c29af19f3234820b0212e3519f6786.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

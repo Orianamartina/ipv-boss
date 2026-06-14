@@ -3,7 +3,10 @@
 [ext_resource type="Script" uid="uid://d0mmodt4vp4pt" path="res://gameplay/cutting_scene.gd" id="1_8fysm"]
 [ext_resource type="PackedScene" uid="uid://c2un47q3kxo26" path="res://gameplay/ScissorsCursor.tscn" id="2_icwa2"]
 [ext_resource type="PackedScene" uid="uid://ch7o43no4ex04" path="res://UI/Score.tscn" id="4_e5pjn"]
+[ext_resource type="PackedScene" uid="uid://bjbxjm0r4ijg5" path="res://UI/controls/controls.tscn" id="5_3epqf"]
 [ext_resource type="PackedScene" uid="uid://cwwshcfrjt8nm" path="res://UI/result_panel.tscn" id="5_result"]
+[ext_resource type="Texture2D" uid="uid://bahu5tdbus6cg" path="res://Assets/UI/controls/joystick-cutting-scene.png" id="6_0csdl"]
+[ext_resource type="Texture2D" uid="uid://djrfs7w1txkro" path="res://Assets/UI/controls/joystick-cutting-scene-2.png" id="7_yd5ve"]
 
 [node name="CuttingScene" type="Node2D" unique_id=2005483906]
 script = ExtResource("1_8fysm")
@@ -25,3 +28,12 @@ position = Vector2(558, 298)
 rotation = -3.0613074
 
 [node name="ResultPanel" parent="." unique_id=1733871843 instance=ExtResource("5_result")]
+
+[node name="Controls" parent="." unique_id=816335834 instance=ExtResource("5_3epqf")]
+offset_left = 30.0
+offset_top = 490.0
+offset_right = 30.0
+offset_bottom = 490.0
+scale = Vector2(0.16, 0.16)
+image_a = ExtResource("6_0csdl")
+image_b = ExtResource("7_yd5ve")

@@ -45,17 +45,7 @@ func _setup_pattern_display() -> void:
 
 	# Calcular bounding box del path en espacio local
 	var path: Path2D = pattern_instance.get_node("PatternPath")
-	var raw_points: PackedVector2Array = path.curve.get_baked_points()
-	var min_pos := Vector2(INF, INF)
-	var max_pos := Vector2(-INF, -INF)
-	for p in raw_points:
-		min_pos.x = minf(min_pos.x, p.x)
-		min_pos.y = minf(min_pos.y, p.y)
-		max_pos.x = maxf(max_pos.x, p.x)
-		max_pos.y = maxf(max_pos.y, p.y)
-	var poly_size: Vector2 = max_pos - min_pos
-
-
+	path.rotation_degrees = 0.0
 
 	var pattern_position = pattern_marker.position
 	pattern_instance.position = pattern_position
@@ -66,18 +56,21 @@ func _setup_pattern_display() -> void:
 	if Global.current_pattern != null and Global.current_pattern.pattern_final_texture != null:
 		var final_sprite := Sprite2D.new()
 		final_sprite.texture = Global.current_pattern.pattern_final_texture
-		final_sprite.scale = Vector2(0.375, 0.375)
+		var s := Global.current_pattern.texture_scale
+		final_sprite.scale = Vector2(s, s)
 		pattern_instance.add_child(final_sprite)
 
 
 func _create_fabric_polygon(pattern_instance: Node2D) -> void:
 	var path: Path2D = pattern_instance.get_node("PatternPath")
 	var raw_points: PackedVector2Array = path.curve.get_baked_points()
-	var points: PackedVector2Array = raw_points
-	if raw_points.size() > 1:
-		var last := raw_points[raw_points.size() - 1]
-		if raw_points[0].distance_to(last) < 1.0:
-			points = raw_points.slice(0, raw_points.size() - 1)
+	var points: PackedVector2Array = PackedVector2Array()
+	for p in raw_points:
+		points.append(path.transform * p)
+	if points.size() > 1:
+		var last := points[points.size() - 1]
+		if points[0].distance_to(last) < 1.0:
+			points = points.slice(0, points.size() - 1)
 
 	var min_pos := Vector2(INF, INF)
 	var max_pos := Vector2(-INF, -INF)
@@ -94,11 +87,13 @@ func _create_fabric_polygon(pattern_instance: Node2D) -> void:
 	if Global.current_fabric != null and Global.current_fabric.texture != null:
 		var tex: Texture2D = Global.current_fabric.texture
 		var tex_size := Vector2(tex.get_width(), tex.get_height())
+		var tile_size := 100.0
 		var uvs := PackedVector2Array()
 		for p in points:
-			uvs.append((p - min_pos) / poly_size * tex_size)
+			uvs.append((p - min_pos) / tile_size * tex_size)
 		fabric_polygon.uv = uvs
 		fabric_polygon.texture = tex
+		fabric_polygon.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	else:
 		fabric_polygon.color = Color(1.0, 0.7, 0.85, 1.0)
 

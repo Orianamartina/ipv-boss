@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2uwssbqp8oas"
-path="res://.godot/imported/basePattern.webp-edd947b498ac398b5d8a152448a71b24.ctex"
+uid="uid://deu30v1tjd87q"
+path="res://.godot/imported/joystick-sewing-scene-2.png-fdad2777f40f675cc77767411e8b1aca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/patterns/basePattern.webp"
-dest_files=["res://.godot/imported/basePattern.webp-edd947b498ac398b5d8a152448a71b24.ctex"]
+source_file="res://Assets/UI/controls/joystick-sewing-scene-2.png"
+dest_files=["res://.godot/imported/joystick-sewing-scene-2.png-fdad2777f40f675cc77767411e8b1aca.ctex"]
 
 [params]
 

@@ -12,9 +12,9 @@ var path: Path2D
 const SCORE_AREA_HEIGHT := 80.0
 const FABRIC_TILE_SCALE := 0.35
 
-const PERFECT_RANGE := 20.0
-const MAX_SPEED := 300.0
-const MAX_SPEED_CUTTING := 150.0
+const PERFECT_RANGE := 40.0
+const MAX_SPEED := 200.0
+const MAX_SPEED_CUTTING := 100.0
 const ACCELERATION := 8.0
 const POINT_DISTANCE := 5.0
 const OVERLAP_DISTANCE := 10.0

@@ -15,7 +15,7 @@ const ROTATION_SPEED := 2.0
 const POINT_DISTANCE := 5.0
 const FINISH_DISTANCE := 40.0
 const MIN_COMPLETION := 0.85
-const PENALTY_PER_SECOND := 100.0
+#const PENALTY_PER_SECOND := 100.0
 
 var max_score: int = 5000
 var score: float = 0.0
@@ -68,11 +68,13 @@ func _create_fabric_polygon() -> void:
 		sprite.visible = false
 
 	var raw_points: PackedVector2Array = path.curve.get_baked_points()
-	var points: PackedVector2Array = raw_points
-	if raw_points.size() > 1:
-		var last := raw_points[raw_points.size() - 1]
-		if raw_points[0].distance_to(last) < 1.0:
-			points = raw_points.slice(0, raw_points.size() - 1)
+	var points: PackedVector2Array = PackedVector2Array()
+	for p in raw_points:
+		points.append(path.transform * p)
+	if points.size() > 1:
+		var last := points[points.size() - 1]
+		if points[0].distance_to(last) < 1.0:
+			points = points.slice(0, points.size() - 1)
 
 	var min_pos := Vector2(INF, INF)
 	var max_pos := Vector2(-INF, -INF)
@@ -89,11 +91,13 @@ func _create_fabric_polygon() -> void:
 	if Global.current_fabric != null and Global.current_fabric.texture != null:
 		var tex: Texture2D = Global.current_fabric.texture
 		var tex_size := Vector2(tex.get_width(), tex.get_height())
+		var tile_size := 100.0
 		var uvs := PackedVector2Array()
 		for p in points:
-			uvs.append((p - min_pos) / poly_size * tex_size)
+			uvs.append((p - min_pos) / tile_size * tex_size)
 		fabric_polygon.uv = uvs
 		fabric_polygon.texture = tex
+		fabric_polygon.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	else:
 		fabric_polygon.color = Color(1.0, 0.7, 0.85, 1.0)
 
@@ -140,7 +144,7 @@ func _process(delta: float) -> void:
 			score = minf(float(max_score), score + score_delta)
 			score_label.modulate = Color.GREEN
 		else:
-			score = maxf(0.0, score - PENALTY_PER_SECOND * delta)
+			score = maxf(0.0, score * delta)
 			score_label.modulate = Color.RED
 		score_label.text = "Score: %d / %d" % [int(score), max_score]
 
@@ -156,9 +160,6 @@ func _rotate_pattern_around_needle(angle: float) -> void:
 	var offset := pattern_instance.global_position - pivot
 	pattern_instance.global_position = pivot + offset.rotated(angle)
 	pattern_instance.rotation += angle
-	var bg_offset := wood_background.global_position - pivot
-	wood_background.global_position = pivot + bg_offset.rotated(angle)
-	wood_background.rotation += angle
 
 
 

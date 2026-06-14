@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvpjvq88twa30"
-path="res://.godot/imported/shirt_focus.png-448b940ee43dc4f43b9872e894437db3.ctex"
+uid="uid://bahu5tdbus6cg"
+path="res://.godot/imported/joystick-cutting-scene.png-a7f16a012e9013f0e95f2173d2b32776.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/patterns/shirt_focus.png"
-dest_files=["res://.godot/imported/shirt_focus.png-448b940ee43dc4f43b9872e894437db3.ctex"]
+source_file="res://Assets/UI/controls/joystick-cutting-scene.png"
+dest_files=["res://.godot/imported/joystick-cutting-scene.png-a7f16a012e9013f0e95f2173d2b32776.ctex"]
 
 [params]
 
