@@ -7,13 +7,23 @@ extends Control
 @onready var back_button = $BackButton
 
 func _ready() -> void:
-	score_label.text = "Puntaje total: %d" % Global.score
+	score_label.text = "Puntaje total: 0"
 	_setup_pattern_display()
-	_setup_stars()
 	back_button.pressed.connect(_on_back_pressed)
+	_animate_score_then_stars()
 
 
-func _setup_stars() -> void:
+func _animate_score_then_stars() -> void:
+	var tween := create_tween()
+	tween.tween_method(_update_score_label, 0.0, float(Global.score), 1.5)
+	tween.tween_callback(_animate_stars)
+
+
+func _update_score_label(value: float) -> void:
+	score_label.text = "Puntaje total: %d" % int(value)
+
+
+func _animate_stars() -> void:
 	var star_tex: Texture2D = load("res://Assets/UI/star.png")
 	var star_disabled_tex: Texture2D = load("res://Assets/UI/star-disabled.png")
 	var max_total := 10000
@@ -22,11 +32,17 @@ func _setup_stars() -> void:
 	var star_count := maxi(1, clampi(roundi(float(Global.score) / float(max_total) * 5.0), 0, 5))
 
 	var star_nodes := stars_container.get_children()
-	for i in star_nodes.size():
+	for star in star_nodes:
+		(star as TextureRect).texture = star_disabled_tex
+
+	for i in star_count:
 		var star := star_nodes[i] as TextureRect
-		if star == null:
-			continue
-		star.texture = star_tex if i < star_count else star_disabled_tex
+		star.pivot_offset = star.size / 2.0
+		var tween := create_tween()
+		tween.tween_interval(float(i) * 0.35)
+		tween.tween_callback(func(): star.texture = star_tex)
+		tween.tween_property(star, "scale", Vector2(1.5, 1.5), 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.tween_property(star, "scale", Vector2(1.0, 1.0), 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 
 func _setup_pattern_display() -> void:

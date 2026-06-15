@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var scissors: Node2D = $ScissorsCursor
 @onready var player_line: Line2D = $PlayerLine
-@onready var score_label: Label = $Score/ScoreLabel
+@onready var score_hud = $Score
 @onready var result_panel: ResultPanel = $ResultPanel
 @onready var fabric_bg: Sprite2D = $Fabric
 
@@ -54,7 +54,7 @@ func _ready() -> void:
 	scissors_position = path.to_global(start_local)
 	scissors.global_position = scissors_position
 	last_point = scissors_position
-	score_label.text = "Score: 0 / %d" % max_score
+	score_hud.setup(max_score)
 
 	result_panel.setup("Corte terminado!", "Continuar")
 	result_panel.continue_pressed.connect(_on_continue_pressed)
@@ -139,15 +139,18 @@ func _process(delta: float) -> void:
 			max_accumulated = maxf(max_accumulated, accumulated_offset)
 			var offset_advance: float = max_accumulated - prev_max
 
+			var cut_color := Color.WHITE
 			if accuracy > 0.0 and offset_advance > 0.0:
 				var score_delta: float = (offset_advance / total_path_length) * float(max_score) * accuracy
 				score = minf(float(max_score), score + score_delta)
+				cut_color = Color.GREEN
 			elif accuracy == 0.0:
 				score = maxf(0.0, score - PENALTY_PER_STEP)
+				cut_color = Color.RED
 
 			player_line.add_point(scissors_position)
 			last_point = scissors_position
-			score_label.text = "Score: %d / %d" % [int(score), max_score]
+			score_hud.update_score(score, cut_color)
 
 
 func _touches_existing_line(pos: Vector2) -> bool:
