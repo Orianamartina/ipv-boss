@@ -25,12 +25,19 @@ func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
 
+	var hide_timer := get_tree().create_timer(10.0)
+	hide_timer.timeout.connect(_fade_out)
+
+
+func _fade_out() -> void:
+	var tween := create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.5)
+	tween.tween_callback(queue_free)
+
 
 func _on_timer_timeout() -> void:
 	if image_b == null:
-		print("Controls: image_b is null, skipping")
 		return
 	showing_a = !showing_a
 	var tex := image_a if showing_a else image_b
-	print("Controls: showing ", "A" if showing_a else "B", " — ", tex.resource_path if tex else "null")
 	texture_rect.texture = tex

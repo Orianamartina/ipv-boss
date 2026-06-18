@@ -36,6 +36,22 @@ func _load_patterns() -> void:
 			first_button = false
 
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("move_left"):
+		_move_focus(-1)
+	elif Input.is_action_just_pressed("move_right"):
+		_move_focus(1)
+
+
+func _move_focus(direction: int) -> void:
+	var buttons := $ButtonsContainer.get_children()
+	for i in buttons.size():
+		if buttons[i].has_focus():
+			var next := clampi(i + direction, 0, buttons.size() - 1)
+			buttons[next].grab_focus()
+			return
+
+
 func _on_button_selected(pattern_data: PatternData) -> void:
 	Global.set_pattern(pattern_data)
 	get_tree().change_scene_to_file("res://UI/fabricMenu/FabricMenu.tscn")

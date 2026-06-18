@@ -16,5 +16,5 @@ func _pressed() -> void:
 	selected.emit(pattern_data)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("enter"):
+	if has_focus() and Input.is_action_just_pressed("enter"):
 		_pressed()

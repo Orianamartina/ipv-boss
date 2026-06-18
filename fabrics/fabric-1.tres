@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="FabricData" format=3 uid="uid://dae7r0gbcnjq7"]
 
 [ext_resource type="Script" uid="uid://6sx38i4crhb7" path="res://gameplay/fabric_data.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://1ulha0t566jf" path="res://Assets/fabric/fabric-1.jpg" id="2_tex"]
+[ext_resource type="Texture2D" uid="uid://c3fr1ckrh6nvi" path="res://Assets/fabric/fabric-2.jpg" id="2_k5wk5"]
 
 [resource]
 script = ExtResource("1_script")
 id = "fabric-1"
-display_name = "Tela floral"
-texture = ExtResource("2_tex")
+display_name = "Tela 1"
+texture = ExtResource("2_k5wk5")

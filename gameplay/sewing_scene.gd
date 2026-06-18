@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var camera: Camera2D = $Camera2D
-@onready var score_label: Label = $Score/ScoreLabel
+@onready var score_hud = $Score
 @onready var result_panel: ResultPanel = $ResultPanel
 @onready var wood_background: Sprite2D = $WoodBackground
 
@@ -9,7 +9,7 @@ var player_line: Line2D
 var pattern_instance: Node2D
 var path: Path2D
 
-const SCORE_RANGE := 10.0
+const SCORE_RANGE := 25.0
 const MAX_ADVANCE_SPEED := 300.0
 const ROTATION_SPEED := 2.0
 const POINT_DISTANCE := 5.0
@@ -38,10 +38,11 @@ func _ready() -> void:
 	path = pattern_instance.get_node("PatternPath")
 	total_path_length = path.curve.get_baked_length()
 
-	score_label.text = "Score: 0 / %d" % max_score
+	score_hud.setup(max_score)
 
 	var start_local: Vector2 = path.curve.get_baked_points()[0]
-	camera.global_position = path.to_global(start_local)
+	var start_world: Vector2 = path.to_global(start_local)
+	pattern_instance.global_position += camera.global_position - start_world
 
 	var center := get_viewport_rect().size / 2.0
 	$Needle/Sprite2D.position = center - Vector2(0, 100)
@@ -52,7 +53,7 @@ func _ready() -> void:
 	player_line = Line2D.new()
 	player_line.width = 12.0
 	player_line.default_color = Color(1, 1, 1, 1)
-	player_line.texture = preload("res://Assets/UI/stiches.png")
+	player_line.texture = preload("res://Assets/UI/sewing-scene/stiches.png")
 	player_line.texture_mode = Line2D.LINE_TEXTURE_TILE
 	player_line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	pattern_instance.add_child(player_line)
@@ -112,47 +113,52 @@ func _process(delta: float) -> void:
 	var throttle := Input.get_action_strength("accelerate")
 	var speed := throttle * MAX_ADVANCE_SPEED
 
-	camera.global_position += Vector2.UP * speed * delta
+	pattern_instance.global_position += Vector2.DOWN * speed * delta
 
 	var rot_input := Input.get_axis("move_left", "move_right")
 	if abs(rot_input) > 0.1:
 		_rotate_pattern_around_needle(rot_input * ROTATION_SPEED * delta)
 	if throttle <= 0.1:
-		score_label.modulate = Color.YELLOW
-		
-	if throttle > 0.1:
-		var local_pos := pattern_instance.to_local(camera.global_position)
-		if last_line_point == Vector2.ZERO:
-			player_line.add_point(local_pos)
-			last_line_point = local_pos
-		elif local_pos.distance_to(last_line_point) > 5.0:
-			player_line.add_point(local_pos)
-			last_line_point = local_pos
+		score_hud.update_score(score, Color.YELLOW)
+		return
 
-		var local_cam: Vector2 = path.to_local(camera.global_position)
-		var closest: Vector2 = path.curve.get_closest_point(local_cam)
-		var distance: float = local_cam.distance_to(closest)
-		var accuracy: float = 1.0 - clamp(distance / SCORE_RANGE, 0.0, 1.0)
+	var local_pos := pattern_instance.to_local(camera.global_position)
+	if last_line_point == Vector2.ZERO:
+		player_line.add_point(local_pos)
+		last_line_point = local_pos
+	elif local_pos.distance_to(last_line_point) > 5.0:
+		player_line.add_point(local_pos)
+		last_line_point = local_pos
 
-		var current_offset: float = path.curve.get_closest_offset(local_cam)
-		var prev_progress: float = max_progress
-		max_progress = maxf(max_progress, current_offset)
-		var offset_advance: float = max_progress - prev_progress
+	var local_cam: Vector2 = path.to_local(camera.global_position)
+	var closest: Vector2 = path.curve.get_closest_point(local_cam)
+	var distance: float = local_cam.distance_to(closest)
+	var accuracy: float = 1.0 - clamp(distance / SCORE_RANGE, 0.0, 1.0)
 
-		if accuracy > 0.0 and offset_advance > 0.0:
+	var current_offset: float = path.curve.get_closest_offset(local_cam)
+	if current_offset > max_progress + total_path_length * 0.05:
+		current_offset = max_progress
+	var prev_progress: float = max_progress
+	max_progress = maxf(max_progress, current_offset)
+	var offset_advance: float = max_progress - prev_progress
+
+	var hud_color := Color.WHITE
+	if offset_advance > 0.0:
+		if accuracy > 0.0:
 			var score_delta: float = (offset_advance / total_path_length) * float(max_score) * accuracy
 			score = minf(float(max_score), score + score_delta)
-			score_label.modulate = Color.GREEN
+			hud_color = Color.GREEN
 		else:
-			score = maxf(0.0, score * delta)
-			score_label.modulate = Color.RED
-		score_label.text = "Score: %d / %d" % [int(score), max_score]
+			var penalty: float = (offset_advance / total_path_length) * float(max_score)
+			score = maxf(0.0, score - penalty)
+			hud_color = Color.RED
+	score_hud.update_score(score, hud_color)
 
-		var start_global: Vector2 = path.to_global(path.curve.get_baked_points()[0])
-		var completion: float = max_progress / total_path_length
-		var dist_to_start: float = camera.global_position.distance_to(start_global)
-		if completion >= MIN_COMPLETION and dist_to_start < FINISH_DISTANCE:
-			_finish_sewing()
+	var start_global: Vector2 = path.to_global(path.curve.get_baked_points()[0])
+	var completion: float = max_progress / total_path_length
+	var dist_to_start: float = camera.global_position.distance_to(start_global)
+	if completion >= MIN_COMPLETION and dist_to_start < FINISH_DISTANCE:
+		_finish_sewing()
 
 
 func _rotate_pattern_around_needle(angle: float) -> void:

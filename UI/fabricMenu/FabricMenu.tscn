@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://4cwi8i5gw58l"]
 
 [ext_resource type="FontFile" uid="uid://d1gbk8j5mjfmv" path="res://Assets/fonts/Chewy-Regular.ttf" id="1_e116d"]
-[ext_resource type="Script" path="res://UI/fabricMenu/fabric_menu.gd" id="2_6hmhc"]
-[ext_resource type="Script" path="res://UI/fabricMenu/fabric_button.gd" id="3_btn"]
-[ext_resource type="Resource" path="res://fabrics/fabric-1.tres" id="4_fab1"]
+[ext_resource type="Script" uid="uid://cfjnq3vjm0vrj" path="res://UI/fabricMenu/fabric_menu.gd" id="2_6hmhc"]
+[ext_resource type="Script" uid="uid://drrlvtjume1l7" path="res://UI/fabricMenu/fabric_button.gd" id="3_btn"]
+[ext_resource type="Resource" uid="uid://dae7r0gbcnjq7" path="res://fabrics/fabric-1.tres" id="4_fab1"]
 [ext_resource type="Resource" path="res://fabrics/fabric-2.tres" id="5_fab2"]
-[ext_resource type="Resource" path="res://fabrics/fabric-3.tres" id="6_fab3"]
+[ext_resource type="Resource" uid="uid://cffmpwv4opl70" path="res://fabrics/fabric-3.tres" id="6_fab3"]
 
-[node name="FabricMenu" type="Control"]
+[node name="FabricMenu" type="Control" unique_id=2117113321]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,13 +16,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_6hmhc")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=518440601]
 layout_mode = 0
 offset_right = 1146.0
 offset_bottom = 638.0
 color = Color(1, 0.8392157, 1, 1)
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=1513372982]
 layout_mode = 0
 offset_left = 251.0
 offset_top = 24.0
@@ -34,7 +34,7 @@ theme_override_font_sizes/font_size = 60
 text = "Elegi una tela"
 horizontal_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1671671192]
 layout_mode = 0
 offset_left = 96.0
 offset_top = 160.0
@@ -45,7 +45,7 @@ stretch_mode = 6
 script = ExtResource("3_btn")
 fabric_data = ExtResource("4_fab1")
 
-[node name="TextureButton2" type="TextureButton" parent="."]
+[node name="TextureButton2" type="TextureButton" parent="." unique_id=1034859998]
 layout_mode = 0
 offset_left = 430.0
 offset_top = 160.0
@@ -56,7 +56,7 @@ stretch_mode = 6
 script = ExtResource("3_btn")
 fabric_data = ExtResource("5_fab2")
 
-[node name="TextureButton3" type="TextureButton" parent="."]
+[node name="TextureButton3" type="TextureButton" parent="." unique_id=1738364055]
 layout_mode = 0
 offset_left = 764.0
 offset_top = 160.0
