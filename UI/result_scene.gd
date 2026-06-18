@@ -10,7 +10,14 @@ func _ready() -> void:
 	score_label.text = "Puntaje total: 0"
 	_setup_pattern_display()
 	back_button.pressed.connect(_on_back_pressed)
+	back_button.focus_mode = Control.FOCUS_ALL
+	back_button.grab_focus()
 	_animate_score_then_stars()
+
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("enter") and back_button.has_focus():
+		_on_back_pressed()
 
 
 func _animate_score_then_stars() -> void:

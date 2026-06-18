@@ -1,21 +1,19 @@
 [gd_resource type="Resource" script_class="PatternData" format=3 uid="uid://h6w0ltril6so"]
 
+[ext_resource type="Texture2D" uid="uid://kld3m6vucllq" path="res://Assets/patterns/patron01/patron01-focus.png" id="1_cxskh"]
 [ext_resource type="Script" uid="uid://btee1yfi58ghw" path="res://gameplay/pattern_data.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://bnhc4ubjxsfh1" path="res://Assets/patterns/patron01/patron01-focus.svg" id="1_ws138"]
+[ext_resource type="Texture2D" uid="uid://spub3fwanx2h" path="res://Assets/patterns/patron01/patron01-pattern.png" id="2_36oo6"]
 [ext_resource type="PackedScene" uid="uid://bwpll6u5hq8ol" path="res://patterns/shapes/ShirtPath.tscn" id="3_ws138"]
 [ext_resource type="Texture2D" uid="uid://c5kyl6qwhucon" path="res://Assets/patterns/patron01/patron01-minijuego.svg" id="4_4koeh"]
 [ext_resource type="Texture2D" uid="uid://cu14glrmr1p5n" path="res://Assets/patterns/patron01/patron01-final.svg" id="4_cxskh"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4koeh"]
-load_path = "res://.godot/imported/patron01-molde.svg-50a9ff36a163e94e8747bda794e9c13c.ctex"
 
 [resource]
 script = ExtResource("1_script")
 id = "shirt"
 display_name = "Remera"
-button_texture = SubResource("CompressedTexture2D_4koeh")
+button_texture = ExtResource("2_36oo6")
 pattern_texture = ExtResource("4_4koeh")
-button_focus_texture = ExtResource("1_ws138")
+button_focus_texture = ExtResource("1_cxskh")
 pattern_final_texture = ExtResource("4_cxskh")
 path_scene = ExtResource("3_ws138")
 texture_scale = 0.3

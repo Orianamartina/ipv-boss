@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dfusxel5kap8g"]
 
 [ext_resource type="Script" uid="uid://bmvkksnxc4ms6" path="res://gameplay/sewing_scene.gd" id="1_sew01"]
-[ext_resource type="Texture2D" uid="uid://c08fpq0ymj1hf" path="res://Assets/UI/wood.jpeg" id="2_sopsa"]
+[ext_resource type="Texture2D" uid="uid://c08fpq0ymj1hf" path="res://Assets/UI/sewing-scene/wood.jpeg" id="2_lta2n"]
+[ext_resource type="Texture2D" uid="uid://cawle08jybhmx" path="res://Assets/UI/sewing-scene/sewing-needle.png" id="3_lta2n"]
 [ext_resource type="PackedScene" uid="uid://ch7o43no4ex04" path="res://UI/Score.tscn" id="3_sew01"]
-[ext_resource type="Texture2D" uid="uid://cawle08jybhmx" path="res://Assets/UI/sewing-needle.png" id="3_sopsa"]
 [ext_resource type="PackedScene" uid="uid://cwwshcfrjt8nm" path="res://UI/result_panel.tscn" id="4_i34do"]
 [ext_resource type="PackedScene" uid="uid://bjbxjm0r4ijg5" path="res://UI/controls/controls.tscn" id="4_lta2n"]
 [ext_resource type="Texture2D" uid="uid://coetsuxk88eyo" path="res://Assets/UI/controls/joystick-sewing-scene.png" id="5_u1q48"]
@@ -16,7 +16,7 @@ script = ExtResource("1_sew01")
 texture_repeat = 2
 position = Vector2(30.999939, 26.000061)
 scale = Vector2(0.50538886, 0.54527783)
-texture = ExtResource("2_sopsa")
+texture = ExtResource("2_lta2n")
 region_enabled = true
 region_rect = Rect2(-4500, -4500, 9000, 9000)
 
@@ -28,7 +28,7 @@ region_rect = Rect2(-4500, -4500, 9000, 9000)
 position = Vector2(577, 219.00002)
 rotation = -0.9616764
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("3_sopsa")
+texture = ExtResource("3_lta2n")
 
 [node name="NeedleMarker" type="ColorRect" parent="Needle" unique_id=1000000004]
 offset_left = 569.5

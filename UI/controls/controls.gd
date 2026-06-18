@@ -37,9 +37,7 @@ func _fade_out() -> void:
 
 func _on_timer_timeout() -> void:
 	if image_b == null:
-		print("Controls: image_b is null, skipping")
 		return
 	showing_a = !showing_a
 	var tex := image_a if showing_a else image_b
-	print("Controls: showing ", "A" if showing_a else "B", " — ", tex.resource_path if tex else "null")
 	texture_rect.texture = tex

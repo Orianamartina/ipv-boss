@@ -53,7 +53,7 @@ func _ready() -> void:
 	player_line = Line2D.new()
 	player_line.width = 12.0
 	player_line.default_color = Color(1, 1, 1, 1)
-	player_line.texture = preload("res://Assets/UI/stiches.png")
+	player_line.texture = preload("res://Assets/UI/sewing-scene/stiches.png")
 	player_line.texture_mode = Line2D.LINE_TEXTURE_TILE
 	player_line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	pattern_instance.add_child(player_line)
