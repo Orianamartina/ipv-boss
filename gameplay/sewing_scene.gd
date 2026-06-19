@@ -4,6 +4,7 @@ extends Node2D
 @onready var score_hud = $Score
 @onready var result_panel: ResultPanel = $ResultPanel
 @onready var wood_background: Sprite2D = $WoodBackground
+@onready var sewing_audio: AudioStreamPlayer2D = $Needle/AudioStreamPlayer2D
 
 var player_line: Line2D
 var pattern_instance: Node2D
@@ -24,6 +25,7 @@ var sewing_active := true
 var total_path_length: float = 0.0
 var max_progress: float = 0.0
 var last_line_point := Vector2.ZERO
+var motor_audio_level: float = 0.0
 
 
 func _ready() -> void:
@@ -112,6 +114,29 @@ func _process(delta: float) -> void:
 
 	var throttle := Input.get_action_strength("accelerate")
 	var speed := throttle * MAX_ADVANCE_SPEED
+	
+	if throttle > 0.1:
+		# Sube rápido hacia el nivel del acelerador (delta * 5.0 es la velocidad de respuesta)
+		motor_audio_level = move_toward(motor_audio_level, throttle, delta * 5.0)
+	else:
+		# Baja más lentamente cuando sueltas el botón para dar el efecto de inercia
+		motor_audio_level = move_toward(motor_audio_level, 0.0, delta * 2.0)
+		
+	if motor_audio_level > 0.01:
+		if not sewing_audio.playing:
+			sewing_audio.play()
+		
+		# Mantenemos el tono realista original
+		sewing_audio.pitch_scale = 1.0 
+		
+		# Interpolamos el volumen: de -8.0 dB (despacio) a 0.0 dB (máxima velocidad)
+		sewing_audio.volume_db = lerp(-10.0, 10.0, throttle)
+		#sewing_audio.pitch_scale = 1 + (throttle * 0.2)
+		sewing_audio.pitch_scale += throttle * 0.2
+		
+	else:
+		if sewing_audio.playing:
+			sewing_audio.stop()
 
 	pattern_instance.global_position += Vector2.DOWN * speed * delta
 
@@ -171,6 +196,8 @@ func _rotate_pattern_around_needle(angle: float) -> void:
 
 func _finish_sewing() -> void:
 	sewing_active = false
+	if sewing_audio.playing:
+		sewing_audio.stop()
 
 	var pattern_center := pattern_instance.global_position
 

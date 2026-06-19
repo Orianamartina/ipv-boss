@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c2un47q3kxo26"]
 
 [ext_resource type="Script" uid="uid://h344ys3jslmn" path="res://gameplay/scissors_cursor.gd" id="1_ng5mu"]
+[ext_resource type="AudioStream" uid="uid://dijpcyw4jhntw" path="res://Assets/audio/short_tijera_sobre_tela.wav" id="2_1bio5"]
 
 [sub_resource type="Animation" id="Animation_ppx7m"]
 length = 0.001
@@ -46,6 +47,12 @@ load_path = "res://.godot/imported/scissors-sprite-sheet.png-1accce33647196a99c0
 
 [node name="ScissorsCursor" type="Node2D" unique_id=504322664]
 script = ExtResource("1_ng5mu")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1719677176]
+position = Vector2(-2, -1)
+rotation = 0.36128315
+scale = Vector2(0.25, 0.245)
+stream = ExtResource("2_1bio5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=966739918]
 root_node = NodePath("../Sprite2D")
