@@ -53,6 +53,7 @@ position = Vector2(-2, -1)
 rotation = 0.36128315
 scale = Vector2(0.25, 0.245)
 stream = ExtResource("2_1bio5")
+bus = &"FX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=966739918]
 root_node = NodePath("../Sprite2D")

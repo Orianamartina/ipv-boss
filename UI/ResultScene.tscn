@@ -38,6 +38,7 @@ text = "Resultado final"
 position = Vector2(19, 182)
 scale = Vector2(0.3, 0.3)
 stream = ExtResource("3_rbnem")
+bus = &"FX"
 
 [node name="StarsContainer" type="HBoxContainer" parent="." unique_id=877913856]
 layout_direction = 2
