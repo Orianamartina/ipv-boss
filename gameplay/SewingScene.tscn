@@ -51,7 +51,6 @@ image_b = ExtResource("6_t2dka")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Needle" unique_id=1413937745]
 stream = ExtResource("7_u1q48")
-autoplay = true
 
 [node name="Score" parent="." unique_id=68589671 instance=ExtResource("3_sew01")]
 

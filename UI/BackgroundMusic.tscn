@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b3elerrwhit45"]
+
+[ext_resource type="AudioStream" uid="uid://cmnbme2pu0p6p" path="res://Assets/audio/I Am a Girl Like You (from 'Barbie as the Princess and the Pauper').wav" id="1_1aryw"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" unique_id=121585255]
+stream = ExtResource("1_1aryw")
+autoplay = true

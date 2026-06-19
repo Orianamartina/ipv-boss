@@ -116,23 +116,22 @@ func _process(delta: float) -> void:
 	var speed := throttle * MAX_ADVANCE_SPEED
 	
 	if throttle > 0.1:
-		# Sube rápido hacia el nivel del acelerador (delta * 5.0 es la velocidad de respuesta)
+		# Sube rápido hacia el nivel del acelerador
 		motor_audio_level = move_toward(motor_audio_level, throttle, delta * 5.0)
 	else:
-		# Baja más lentamente cuando sueltas el botón para dar el efecto de inercia
+		# Baja lentamente cuando sueltas el botón
 		motor_audio_level = move_toward(motor_audio_level, 0.0, delta * 2.0)
 		
 	if motor_audio_level > 0.01:
 		if not sewing_audio.playing:
 			sewing_audio.play()
 		
-		# Mantenemos el tono realista original
-		sewing_audio.pitch_scale = 1.0 
+		# UN SOLO LERP DE VOLUMEN: ajusta el -25 y el -10 si lo quieres más fuerte o suave
+		sewing_audio.volume_db = lerp(-18.0, -2.0, motor_audio_level)
 		
-		# Interpolamos el volumen: de -8.0 dB (despacio) a 0.0 dB (máxima velocidad)
-		sewing_audio.volume_db = lerp(-10.0, 10.0, throttle)
-		#sewing_audio.pitch_scale = 1 + (throttle * 0.2)
-		sewing_audio.pitch_scale += throttle * 0.2
+		# UN SOLO PITCH: Se calcula desde 1.0 (normal) hasta 1.2 (acelerado)
+		# Usamos motor_audio_level para que el pitch también baje suavemente al soltar
+		sewing_audio.pitch_scale = 1.0 + (motor_audio_level * 0.2)
 		
 	else:
 		if sewing_audio.playing:
