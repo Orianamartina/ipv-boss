@@ -25,18 +25,22 @@ expand_mode = 1
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="." unique_id=1396332134]
 layout_mode = 0
-offset_left = 72.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
 offset_top = 155.0
-offset_right = 1072.0
+offset_right = 500.0
 offset_bottom = 620.0
 theme_override_constants/separation = 40
 alignment = 1
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=2032826895]
 layout_mode = 0
-offset_left = 384.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.5
 offset_top = 48.0
-offset_right = 805.0
+offset_right = 210.5
 offset_bottom = 157.0
 texture = ExtResource("3_unae7")
 expand_mode = 1

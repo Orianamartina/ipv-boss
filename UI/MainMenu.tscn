@@ -42,9 +42,11 @@ horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="." unique_id=1082193933]
 layout_mode = 0
-offset_left = 424.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.5
 offset_top = 484.0
-offset_right = 745.0
+offset_right = 160.5
 offset_bottom = 614.0
 theme_override_fonts/font = ExtResource("2_8aown")
 theme_override_font_sizes/font_size = 64
@@ -52,9 +54,11 @@ text = "Empezar"
 
 [node name="Greeting" type="Label" parent="." unique_id=1426917483]
 layout_mode = 0
-offset_left = 4.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -573.0
 offset_top = 309.0
-offset_right = 1150.0
+offset_right = 573.0
 offset_bottom = 387.0
 theme_override_fonts/font = ExtResource("2_8aown")
 theme_override_font_sizes/font_size = 60

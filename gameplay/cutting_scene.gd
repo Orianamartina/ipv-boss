@@ -38,9 +38,14 @@ func _ready() -> void:
 	if Global.current_pattern != null:
 		max_score = Global.current_pattern.max_score
 
+	var vp_size := get_viewport_rect().size
+	var bg: ColorRect = $ColorRect
+	bg.position = Vector2.ZERO
+	bg.size = vp_size
+
 	var cut_pattern_scene := preload("res://gameplay/CutPattern.tscn")
 	pattern = cut_pattern_scene.instantiate()
-	pattern.position = Vector2(567, 350)
+	pattern.position = Vector2(vp_size.x / 2.0, SCORE_AREA_HEIGHT + (vp_size.y - SCORE_AREA_HEIGHT) / 2.0)
 	pattern.scale = Vector2(1, 1)
 	add_child(pattern)
 	move_child(pattern, 3)

@@ -17,16 +17,21 @@ grow_vertical = 2
 script = ExtResource("2_6hmhc")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=518440601]
-layout_mode = 0
-offset_right = 1146.0
-offset_bottom = 638.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(1, 0.8392157, 1, 1)
 
 [node name="Title" type="Label" parent="." unique_id=1513372982]
 layout_mode = 0
-offset_left = 251.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -318.5
 offset_top = 24.0
-offset_right = 888.0
+offset_right = 318.5
 offset_bottom = 131.0
 theme_override_colors/font_color = Color(0.87920475, 0.00061896147, 0.8791987, 1)
 theme_override_fonts/font = ExtResource("1_e116d")
@@ -36,9 +41,11 @@ horizontal_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="." unique_id=1671671192]
 layout_mode = 0
-offset_left = 96.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -480.0
 offset_top = 160.0
-offset_right = 390.0
+offset_right = -186.0
 offset_bottom = 500.0
 ignore_texture_size = true
 stretch_mode = 6
@@ -47,9 +54,11 @@ fabric_data = ExtResource("4_fab1")
 
 [node name="TextureButton2" type="TextureButton" parent="." unique_id=1034859998]
 layout_mode = 0
-offset_left = 430.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -146.0
 offset_top = 160.0
-offset_right = 724.0
+offset_right = 148.0
 offset_bottom = 500.0
 ignore_texture_size = true
 stretch_mode = 6
@@ -58,9 +67,11 @@ fabric_data = ExtResource("5_fab2")
 
 [node name="TextureButton3" type="TextureButton" parent="." unique_id=1738364055]
 layout_mode = 0
-offset_left = 764.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 188.0
 offset_top = 160.0
-offset_right = 1058.0
+offset_right = 482.0
 offset_bottom = 500.0
 ignore_texture_size = true
 stretch_mode = 6
