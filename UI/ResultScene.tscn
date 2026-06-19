@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dhnxxufek5yq" path="res://UI/result_scene.gd" id="1_res01"]
 [ext_resource type="FontFile" uid="uid://chv31ikip8n7g" path="res://UI/fonts/Chewy-Regular.ttf" id="2_res01"]
 [ext_resource type="Texture2D" uid="uid://vg670qb5sr56" path="res://Assets/UI/star-disabled.png" id="3_370cf"]
+[ext_resource type="AudioStream" uid="uid://crk5wtpan4gnx" path="res://Assets/audio/shine-4.wav" id="3_rbnem"]
 [ext_resource type="FontFile" uid="uid://dq2y8l6ab26qm" path="res://Assets/fonts/RougeScript-Regular.ttf" id="3_res01"]
 
 [node name="ResultScene" type="Control" unique_id=495932054]
@@ -32,6 +33,11 @@ offset_bottom = 129.0
 theme_override_fonts/font = ExtResource("3_res01")
 theme_override_font_sizes/font_size = 80
 text = "Resultado final"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=164107383]
+position = Vector2(19, 182)
+scale = Vector2(0.3, 0.3)
+stream = ExtResource("3_rbnem")
 
 [node name="StarsContainer" type="HBoxContainer" parent="." unique_id=877913856]
 layout_direction = 2

@@ -5,6 +5,7 @@ extends Control
 @onready var pattern_marker = $PatternMarker
 @onready var stars_container = $StarsContainer
 @onready var back_button = $BackButton
+@onready var star_audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _ready() -> void:
 	score_label.text = "Puntaje total: 0"
@@ -47,7 +48,10 @@ func _animate_stars() -> void:
 		star.pivot_offset = star.size / 2.0
 		var tween := create_tween()
 		tween.tween_interval(float(i) * 0.35)
-		tween.tween_callback(func(): star.texture = star_tex)
+		tween.tween_callback(func(): 
+			star.texture = star_tex
+			star_audio.play()
+		)
 		tween.tween_property(star, "scale", Vector2(1.5, 1.5), 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		tween.tween_property(star, "scale", Vector2(1.0, 1.0), 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
