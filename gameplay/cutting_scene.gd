@@ -121,32 +121,47 @@ func _process(delta: float) -> void:
 				last_point = scissors_position
 				return
 
-			# Progreso relativo: detecta cruce del nudo (salto grande en offset)
-			var raw_delta: float = current_offset - prev_raw_offset
-			if raw_delta < -total_path_length * 0.5:
-				raw_delta += total_path_length
-			elif raw_delta > total_path_length * 0.5:
-				raw_delta -= total_path_length
-			prev_raw_offset = current_offset
-
-			if cutting_direction == 0.0 and abs(raw_delta) > 0.5:
-				cutting_direction = sign(raw_delta)
-
-			var progress_delta: float = raw_delta * cutting_direction
-			if progress_delta > 0.0:
-				accumulated_offset = minf(accumulated_offset + progress_delta, total_path_length)
-			var prev_max: float = max_accumulated
-			max_accumulated = maxf(max_accumulated, accumulated_offset)
-			var offset_advance: float = max_accumulated - prev_max
-
 			var cut_color := Color.WHITE
-			if accuracy > 0.0 and offset_advance > 0.0:
-				var score_delta: float = (offset_advance / total_path_length) * float(max_score) * accuracy
-				score = minf(float(max_score), score + score_delta)
-				cut_color = Color.GREEN
-			elif accuracy == 0.0:
+
+			# Solo calculamos avances si estamos sobre o cerca de la línea
+			if accuracy > 0.0:
+				var raw_delta: float = current_offset - prev_raw_offset
+				if raw_delta < -total_path_length * 0.5:
+					raw_delta += total_path_length
+				elif raw_delta > total_path_length * 0.5:
+					raw_delta -= total_path_length
+				
+				# Actualizamos prev_raw_offset para el próximo frame
+				prev_raw_offset = current_offset
+
+				if cutting_direction == 0.0 and abs(raw_delta) > 0.5:
+					cutting_direction = sign(raw_delta)
+
+				var progress_delta: float = raw_delta * cutting_direction
+				
+				# Filtro de seguridad: si reingresas a la línea muy lejos de donde saliste, 
+				# ignoramos el salto gigante para que no regale puntos por atajos
+				if abs(progress_delta) > 50.0:
+					progress_delta = 0.0
+
+				accumulated_offset += progress_delta
+				accumulated_offset = clamp(accumulated_offset, 0.0, total_path_length)
+
+				var prev_max: float = max_accumulated
+				max_accumulated = maxf(max_accumulated, accumulated_offset)
+				var offset_advance: float = max_accumulated - prev_max
+
+				if offset_advance > 0.0:
+					var score_delta: float = (offset_advance / total_path_length) * float(max_score) * accuracy
+					score = minf(float(max_score), score + score_delta)
+					cut_color = Color.GREEN
+			
+			# Si te alejas de la línea, solo aplicamos la penalización
+			else:
 				score = maxf(0.0, score - PENALTY_PER_STEP)
 				cut_color = Color.RED
+				# Al no actualizar prev_raw_offset aquí, el progreso se retoma exactamente
+				# desde donde lo dejaste cuando vuelvas a tocar la línea.
 
 			player_line.add_point(scissors_position)
 			last_point = scissors_position
@@ -155,13 +170,15 @@ func _process(delta: float) -> void:
 
 func _touches_existing_line(pos: Vector2) -> bool:
 	var points: PackedVector2Array = player_line.points
-	var check_up_to: int = points.size() - 20
-	if check_up_to < 2:
+	
+	if points.size() < 20:
 		return false
-	for i in range(check_up_to - 1):
-		var closest := Geometry2D.get_closest_point_to_segment(pos, points[i], points[i + 1])
-		if pos.distance_to(closest) < OVERLAP_DISTANCE:
-			return true
+
+	var closest := Geometry2D.get_closest_point_to_segment(pos, points[0], points[1])
+	
+	if pos.distance_to(closest) < OVERLAP_DISTANCE:
+		return true
+		
 	return false
 
 

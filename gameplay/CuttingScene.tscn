@@ -21,11 +21,11 @@ color = Color(1, 0.70980394, 1, 1)
 [node name="Fabric" type="Sprite2D" parent="." unique_id=1224635060]
 
 [node name="PlayerLine" type="Line2D" parent="." unique_id=1871178758]
-default_color = Color(0, 1, 1, 1)
+default_color = Color(1, 0.70980394, 1, 1)
 
 [node name="ScissorsCursor" parent="." unique_id=504322664 instance=ExtResource("2_icwa2")]
 position = Vector2(558, 298)
-rotation = -3.0613074
+scale = Vector2(2, 2)
 
 [node name="ResultPanel" parent="." unique_id=1733871843 instance=ExtResource("5_result")]
 
