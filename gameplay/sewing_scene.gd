@@ -10,7 +10,7 @@ var player_line: Line2D
 var pattern_instance: Node2D
 var path: Path2D
 
-const SCORE_RANGE := 25.0
+const SCORE_RANGE := 50.0
 const MAX_ADVANCE_SPEED := 300.0
 const ROTATION_SPEED := 2.0
 const POINT_DISTANCE := 5.0
@@ -21,11 +21,14 @@ const MIN_COMPLETION := 0.85
 var max_score: int = 5000
 var score: float = 0.0
 var sewing_active := true
+var is_paused := false
 
 var total_path_length: float = 0.0
 var max_progress: float = 0.0
 var last_line_point := Vector2.ZERO
 var motor_audio_level: float = 0.0
+var needle_time: float = 0.0
+var needle_base_y: float = 0.0
 
 
 func _ready() -> void:
@@ -46,9 +49,14 @@ func _ready() -> void:
 	var start_world: Vector2 = path.to_global(start_local)
 	pattern_instance.global_position += camera.global_position - start_world
 
+	if Global.current_pattern != null:
+		var rot := deg_to_rad(Global.current_pattern.texture_rotation_degrees)
+		_rotate_pattern_around_needle(-rot)
+
 	var center := get_viewport_rect().size / 2.0
 	$Needle/Sprite2D.position = center - Vector2(0, 100)
 	$Needle/NeedleMarker.position = center - Vector2(5, 5)
+	needle_base_y = $Needle/Sprite2D.position.y
 
 	_create_fabric_polygon()
 
@@ -109,6 +117,13 @@ func _create_fabric_polygon() -> void:
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause") and sewing_active:
+		_toggle_pause()
+		return
+
+	if is_paused:
+		return
+
 	if not sewing_active:
 		return
 
@@ -136,6 +151,9 @@ func _process(delta: float) -> void:
 	else:
 		if sewing_audio.playing:
 			sewing_audio.stop()
+
+	needle_time += throttle * 20.0 * delta
+	$Needle/Sprite2D.position.y = needle_base_y + sin(needle_time) * 30.0 * throttle
 
 	pattern_instance.global_position += Vector2.DOWN * speed * delta
 
@@ -173,7 +191,7 @@ func _process(delta: float) -> void:
 			score = minf(float(max_score), score + score_delta)
 			hud_color = Color.GREEN
 		else:
-			var penalty: float = (offset_advance / total_path_length) * float(max_score)
+			var penalty: float = (offset_advance / total_path_length) * float(max_score) * 0.2
 			score = maxf(0.0, score - penalty)
 			hud_color = Color.RED
 	score_hud.update_score(score, hud_color)
@@ -212,11 +230,22 @@ func _finish_sewing() -> void:
 
 
 func _show_result_panel() -> void:
+	result_panel.setup("Costura terminada!", "Ver resultado")
 	var percentage := int(score / float(max_score) * 100.0)
 	result_panel.show_result("%d / %d  (%d%%)" % [int(score), max_score, percentage])
 
 
+func _toggle_pause() -> void:
+	is_paused = true
+	result_panel.setup("Pausa", "Reanudar", "Reintentar")
+	result_panel.show_result("Puntaje: %d" % int(score))
+
+
 func _on_continue_pressed() -> void:
+	if is_paused:
+		is_paused = false
+		result_panel.visible = false
+		return
 	Global.add_score(int(score))
 	get_tree().change_scene_to_file("res://UI/ResultScene.tscn")
 

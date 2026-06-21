@@ -18,6 +18,9 @@ func _ready() -> void:
 
 	line.points = path.curve.get_baked_points()
 
+	if Global.current_fabric != null:
+		line.default_color = Global.current_fabric.line_color
+
 	if Global.current_pattern != null:
 		var rot := Global.current_pattern.texture_rotation_degrees
 		path.rotation_degrees = rot

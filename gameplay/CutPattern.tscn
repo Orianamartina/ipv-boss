@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://x6unls07c6d2"]
 
 [ext_resource type="Script" uid="uid://bx473px7lbr5t" path="res://gameplay/cut_pattern.gd" id="1_37q1x"]
-[ext_resource type="Texture2D" uid="uid://cteutuqhi32io" path="res://Assets/UI/red-line.webp" id="3_37q1x"]
+[ext_resource type="Texture2D" uid="uid://debi3dgi2aerg" path="res://Assets/UI/border-line.png" id="2_6p0tb"]
 
 [sub_resource type="Curve2D" id="Curve2D_hemq2"]
 
@@ -17,7 +17,7 @@ curve = SubResource("Curve2D_hemq2")
 texture_repeat = 2
 width = 30.0
 default_color = Color(1, 0, 1, 1)
-texture = ExtResource("3_37q1x")
+texture = ExtResource("2_6p0tb")
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2

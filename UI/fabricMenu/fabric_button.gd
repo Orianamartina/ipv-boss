@@ -2,37 +2,26 @@ extends TextureButton
 
 signal selected(fabric_data: FabricData)
 
-var grayscale_shader = preload("res://UI/fabricMenu/grayscale.gdshader")
-
 @export var fabric_data: FabricData:
 	set(value):
 		fabric_data = value
-		if value and value.texture:
-			texture_normal = value.texture
+		if value:
+			texture_normal = value.button_texture if value.button_texture else value.texture
 			texture_focused = null
 
 func _ready() -> void:
 	ignore_texture_size = true
-	stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_COVERED
-	
-	material = ShaderMaterial.new()
-	material.shader = grayscale_shader
-	
+	stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
-	
-	_on_focus_exited()
 
 func _on_focus_entered() -> void:
-	if material and material is ShaderMaterial:
-		material.set_shader_parameter("grayscale_amount", 0.0)
-	modulate = Color(1.25, 1.25, 1.25)
+	if fabric_data and fabric_data.button_focus_texture:
+		texture_normal = fabric_data.button_focus_texture
 
 func _on_focus_exited() -> void:
-	# Pierde el foco = Se pone gris (1.0) y vuelve a su brillo base
-	if material and material is ShaderMaterial:
-		material.set_shader_parameter("grayscale_amount", 1.0)
-	modulate = Color(1.0, 1.0, 1.0)
+	if fabric_data:
+		texture_normal = fabric_data.button_texture if fabric_data.button_texture else fabric_data.texture
 
 func _pressed() -> void:
 	selected.emit(fabric_data)

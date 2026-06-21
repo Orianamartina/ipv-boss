@@ -9,5 +9,14 @@ extends Resource
 ## Nombre visible para el jugador (ej: "Tela floral", "Jean")
 @export var display_name: String = ""
 
-## Textura de la tela — se usa en el botón del menú y para rellenar el patrón en SewingScene.
+## Textura de la tela — se usa para rellenar el patrón en SewingScene.
 @export var texture: Texture2D
+
+## Textura del botón en el menú de telas (estado normal).
+@export var button_texture: Texture2D
+
+## Textura del botón en el menú de telas (estado enfocado/seleccionado).
+@export var button_focus_texture: Texture2D
+
+## Color de la línea del patrón en la escena de corte — elegir un color que contraste con esta tela.
+@export var line_color: Color = Color(1, 0, 1, 1)

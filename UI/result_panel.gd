@@ -8,6 +8,8 @@ signal retry_pressed
 @onready var score_label: Label = $ScoreLabel
 @onready var continue_button: Button = $ContinueButton
 @onready var retry_button: Button = $RetryButton
+@onready var music_btn: TextureButton = $SoundMenu/TextureButton
+@onready var fx_btn: TextureButton = $SoundMenu/TextureButton2
 
 
 func _ready() -> void:
@@ -21,17 +23,43 @@ func _process(_delta: float) -> void:
 	if not visible:
 		return
 
-	if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
-		if continue_button.has_focus():
-			retry_button.grab_focus()
-		else:
-			continue_button.grab_focus()
+	var cont_f := continue_button.has_focus()
+	var retry_f := retry_button.has_focus()
+	var music_f := music_btn.has_focus()
+	var fx_f    := fx_btn.has_focus()
 
+	# Left/Right: navega dentro de la fila
+	if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
+		if cont_f:
+			retry_button.grab_focus()
+		elif retry_f:
+			continue_button.grab_focus()
+		elif music_f:
+			fx_btn.grab_focus()
+		elif fx_f:
+			music_btn.grab_focus()
+
+	# Up/Down: navega entre filas manteniendo la columna
+	if Input.is_action_just_pressed("move_up") or Input.is_action_just_pressed("move_down"):
+		if cont_f:
+			music_btn.grab_focus()
+		elif retry_f:
+			fx_btn.grab_focus()
+		elif music_f:
+			continue_button.grab_focus()
+		elif fx_f:
+			retry_button.grab_focus()
+
+	# Enter: activa el botón con focus
 	if Input.is_action_just_pressed("enter"):
-		if continue_button.has_focus():
+		if cont_f:
 			continue_pressed.emit()
-		elif retry_button.has_focus():
+		elif retry_f:
 			retry_pressed.emit()
+		elif music_f:
+			music_btn.pressed.emit()
+		elif fx_f:
+			fx_btn.pressed.emit()
 
 
 func setup(title: String, continue_text: String, retry_text: String = "Reintentar") -> void:

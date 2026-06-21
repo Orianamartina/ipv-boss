@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d0mmodt4vp4pt" path="res://gameplay/cutting_scene.gd" id="1_8fysm"]
 [ext_resource type="PackedScene" uid="uid://c2un47q3kxo26" path="res://gameplay/ScissorsCursor.tscn" id="2_icwa2"]
+[ext_resource type="Texture2D" uid="uid://c08fpq0ymj1hf" path="res://Assets/UI/sewing-scene/wood.jpeg" id="2_yd5ve"]
 [ext_resource type="PackedScene" uid="uid://ch7o43no4ex04" path="res://UI/Score.tscn" id="4_e5pjn"]
 [ext_resource type="PackedScene" uid="uid://bjbxjm0r4ijg5" path="res://UI/controls/controls.tscn" id="5_3epqf"]
 [ext_resource type="PackedScene" uid="uid://cwwshcfrjt8nm" path="res://UI/result_panel.tscn" id="5_result"]
@@ -11,12 +12,21 @@
 [node name="CuttingScene" type="Node2D" unique_id=2005483906]
 script = ExtResource("1_8fysm")
 
-[node name="Score" parent="." unique_id=68589670 instance=ExtResource("4_e5pjn")]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=959965408]
+texture_repeat = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -312.0
+offset_right = 1346.0
+offset_bottom = 1057.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yd5ve")
+stretch_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1273500207]
-offset_right = 1148.0
-offset_bottom = 642.0
-color = Color(1, 0.70980394, 1, 1)
+[node name="Score" parent="." unique_id=68589670 instance=ExtResource("4_e5pjn")]
 
 [node name="Fabric" type="Sprite2D" parent="." unique_id=1224635060]
 
