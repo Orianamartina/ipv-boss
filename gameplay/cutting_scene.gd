@@ -12,7 +12,7 @@ var path: Path2D
 const SCORE_AREA_HEIGHT := 80.0
 const FABRIC_TILE_SCALE := 0.35
 
-const PERFECT_RANGE := 40.0
+const PERFECT_RANGE := 100.0
 const MAX_SPEED := 200.0
 const MAX_SPEED_CUTTING := 100.0
 const ACCELERATION := 8.0
@@ -24,6 +24,7 @@ var max_score: int = 5000
 var score: float = 0.0
 var total_path_length: float = 0.0
 var cutting_active := true
+var is_paused := false
 var cut_initialized := false
 var accumulated_offset: float = 0.0
 var max_accumulated: float = 0.0
@@ -39,9 +40,6 @@ func _ready() -> void:
 		max_score = Global.current_pattern.max_score
 
 	var vp_size := get_viewport_rect().size
-	var bg: ColorRect = $ColorRect
-	bg.position = Vector2.ZERO
-	bg.size = vp_size
 
 	var cut_pattern_scene := preload("res://gameplay/CutPattern.tscn")
 	pattern = cut_pattern_scene.instantiate()
@@ -85,6 +83,13 @@ func _setup_fabric_background() -> void:
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause") and cutting_active:
+		_toggle_pause()
+		return
+
+	if is_paused:
+		return
+
 	var input_vector := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 	var current_max_speed := MAX_SPEED_CUTTING if Input.is_action_pressed("cut") else MAX_SPEED
@@ -191,11 +196,22 @@ func _finish_cut() -> void:
 	cutting_active = false
 	player_line.add_point(player_line.points[0])
 	scissors.visible = false
+	result_panel.setup("Corte terminado!", "Continuar")
 	var percentage := int(score / float(max_score) * 100.0)
 	result_panel.show_result("%d / %d  (%d%%)" % [int(score), max_score, percentage])
 
 
+func _toggle_pause() -> void:
+	is_paused = true
+	result_panel.setup("Pausa", "Reanudar", "Reintentar")
+	result_panel.show_result("Puntaje: %d" % int(score))
+
+
 func _on_continue_pressed() -> void:
+	if is_paused:
+		is_paused = false
+		result_panel.visible = false
+		return
 	Global.add_score(int(score))
 	get_tree().change_scene_to_file("res://gameplay/SewingScene.tscn")
 

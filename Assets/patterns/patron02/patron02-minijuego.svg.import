@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1ulha0t566jf"
-path="res://.godot/imported/fabric-1.jpg-4a1208b18982ce7a03101c30eae40023.ctex"
+uid="uid://b8i1d5m5btqru"
+path="res://.godot/imported/patron02-minijuego.svg-04c5fb0b3d231669755d4ec4b5f9829d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/fabric/fabric-1.jpg"
-dest_files=["res://.godot/imported/fabric-1.jpg-4a1208b18982ce7a03101c30eae40023.ctex"]
+source_file="res://Assets/patterns/patron02/patron02-minijuego.svg"
+dest_files=["res://.godot/imported/patron02-minijuego.svg-04c5fb0b3d231669755d4ec4b5f9829d.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=3.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -1,16 +1,43 @@
 extends Control
 
+const BTN_SCRIPT := preload("res://UI/fabricMenu/fabric_button.gd")
+
+const FABRICS: Array[String] = [
+	"res://fabrics/fabric-1.tres",
+	"res://fabrics/fabric-2.tres",
+	"res://fabrics/fabric-3.tres",
+]
+
 var _buttons: Array = []
 
 func _ready():
-	for child in get_children():
-		if child is TextureButton:
-			_buttons.append(child)
-			child.selected.connect(_on_button_selected)
-			child.focus_mode = Control.FOCUS_ALL
+	_load_fabrics()
 
-	if _buttons.size() > 0:
-		_buttons[0].grab_focus()
+func _load_fabrics() -> void:
+	var container := $ButtonsContainer
+	var first := true
+
+	for path in FABRICS:
+		var fabric_data: FabricData = load(path)
+		if not fabric_data is FabricData:
+			push_error("FabricMenu: no se pudo cargar la tela: " + path)
+			continue
+
+		var btn := TextureButton.new()
+		btn.set_script(BTN_SCRIPT)
+		btn.ignore_texture_size = true
+		btn.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+		btn.custom_minimum_size = Vector2(350, 350)
+		btn.focus_mode = Control.FOCUS_ALL
+		container.add_child(btn)
+		btn.fabric_data = fabric_data
+		btn.selected.connect(_on_button_selected)
+
+		if first:
+			btn.grab_focus()
+			first = false
+
+	_buttons = container.get_children()
 
 
 func _process(_delta: float) -> void:

@@ -1,10 +1,15 @@
 [gd_resource type="Resource" script_class="FabricData" format=3 uid="uid://cffmpwv4opl70"]
 
+[ext_resource type="Texture2D" uid="uid://dyx5oaga82ka2" path="res://Assets/fabric/fabric-3-focus.png" id="1_g18b3"]
 [ext_resource type="Script" uid="uid://6sx38i4crhb7" path="res://gameplay/fabric_data.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://bsv7qmvl0hj05" path="res://Assets/fabric/fabric-3.png" id="2_ixms4"]
+[ext_resource type="Texture2D" uid="uid://ck2h7f5mtl7f" path="res://Assets/fabric/fabric-3.png" id="2_ixms4"]
+[ext_resource type="Texture2D" uid="uid://d1vb854aprcve" path="res://Assets/fabric/fabric-3-button.png" id="2_x02hy"]
 
 [resource]
 script = ExtResource("1_script")
 id = "fabric-3"
 display_name = "Tela 3"
 texture = ExtResource("2_ixms4")
+button_texture = ExtResource("2_x02hy")
+button_focus_texture = ExtResource("1_g18b3")
+line_color = Color(0.8004247, 0, 0.20174056, 1)

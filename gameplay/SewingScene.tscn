@@ -32,6 +32,7 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_lta2n")
 
 [node name="NeedleMarker" type="ColorRect" parent="Needle" unique_id=1000000004]
+visible = false
 offset_left = 569.5
 offset_top = 317.5
 offset_right = 579.5

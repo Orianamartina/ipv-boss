@@ -1,7 +1,6 @@
 extends Control
 
 @onready var score_label = $ScoreLabel
-@onready var detail_label = $DetailLabel
 @onready var pattern_marker = $PatternMarker
 @onready var stars_container = $StarsContainer
 @onready var back_button = $BackButton
@@ -37,7 +36,7 @@ func _animate_stars() -> void:
 	var max_total := 10000
 	if Global.current_pattern != null:
 		max_total = Global.current_pattern.max_score * 2
-	var star_count := maxi(1, clampi(roundi(float(Global.score) / float(max_total) * 5.0), 0, 5))
+	var star_count := maxi(1, clampi(roundi(float(Global.score) / (float(max_total) * 0.85) * 5.0), 0, 5))
 
 	var star_nodes := stars_container.get_children()
 	for star in star_nodes:
