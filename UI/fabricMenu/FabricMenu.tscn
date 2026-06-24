@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://4cwi8i5gw58l"]
 
 [ext_resource type="Script" uid="uid://cfjnq3vjm0vrj" path="res://UI/fabricMenu/fabric_menu.gd" id="2_6hmhc"]
+[ext_resource type="AudioStream" uid="uid://c5hxcjdl43mg3" path="res://Assets/audio/computer-mouse-click.wav" id="3_6qwxn"]
+[ext_resource type="Script" uid="uid://drrlvtjume1l7" path="res://UI/fabricMenu/fabric_button.gd" id="3_btn"]
+[ext_resource type="Resource" uid="uid://dae7r0gbcnjq7" path="res://fabrics/fabric-1.tres" id="4_fab1"]
+[ext_resource type="Resource" path="res://fabrics/fabric-2.tres" id="5_fab2"]
+[ext_resource type="Resource" uid="uid://cffmpwv4opl70" path="res://fabrics/fabric-3.tres" id="6_fab3"]
 [ext_resource type="Texture2D" uid="uid://b1683to2elreq" path="res://Assets/UI/fabric-menu/fabric-menu-bg.png" id="2_i67ww"]
 
 [node name="FabricMenu" type="Control" unique_id=2117113321]
@@ -21,6 +26,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_i67ww")
 expand_mode = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=645702298]
+stream = ExtResource("3_6qwxn")
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="." unique_id=1396332134]
 layout_mode = 1

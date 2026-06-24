@@ -1,6 +1,7 @@
 extends Control
 
 @onready var greetingLabel = $Greeting
+@onready var click_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var titleSprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
@@ -16,4 +17,6 @@ func _on_player_name_changed(new_name: String) -> void:
 	greetingLabel.text = "Hola, " + new_name + "!"
 	
 func _on_start_button_pressed() -> void:
+	click_sound.play()
+	await click_sound.finished
 	get_tree().change_scene_to_file("res://UI/PatternMenu.tscn")

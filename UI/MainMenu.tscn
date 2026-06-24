@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dq2y8l6ab26qm" path="res://Assets/fonts/RougeScript-Regular.ttf" id="1_b37jj"]
 [ext_resource type="FontFile" uid="uid://d1gbk8j5mjfmv" path="res://Assets/fonts/Chewy-Regular.ttf" id="2_8aown"]
 [ext_resource type="Texture2D" uid="uid://x18qfc0yoqhk" path="res://Assets/UI/main_title.png" id="2_t6syg"]
+[ext_resource type="AudioStream" uid="uid://c5hxcjdl43mg3" path="res://Assets/audio/computer-mouse-click.wav" id="4_y6s48"]
 
 [node name="MainMenu" type="Control" unique_id=392563101]
 layout_mode = 3
@@ -39,6 +40,10 @@ theme_override_font_sizes/font_size = 120
 text = "El taller de los
 retazos"
 horizontal_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1561880281]
+position = Vector2(424, 484)
+stream = ExtResource("4_y6s48")
 
 [node name="StartButton" type="Button" parent="." unique_id=1082193933]
 layout_mode = 0

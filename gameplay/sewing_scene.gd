@@ -4,7 +4,7 @@ extends Node2D
 @onready var score_hud = $Score
 @onready var result_panel: ResultPanel = $ResultPanel
 @onready var wood_background: Sprite2D = $WoodBackground
-@onready var sewing_audio: AudioStreamPlayer2D = $Needle/AudioStreamPlayer2D
+@onready var sewing_audio: AudioStreamPlayer2D = $Needle/SewingMachine
 
 var player_line: Line2D
 var pattern_instance: Node2D

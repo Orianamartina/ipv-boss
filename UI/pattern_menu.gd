@@ -1,5 +1,7 @@
 extends Control
 
+@onready var click_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 const BTN_SCRIPT := preload("res://UI/pattern_btn.gd")
 
 const PATTERNS: Array[String] = [
@@ -7,9 +9,10 @@ const PATTERNS: Array[String] = [
 	"res://patterns/pants.tres",
 ]
 
+var is_transitioning := false
+
 func _ready() -> void:
 	_load_patterns()
-
 
 func _load_patterns() -> void:
 	var container := $ButtonsContainer
@@ -53,5 +56,14 @@ func _move_focus(direction: int) -> void:
 
 
 func _on_button_selected(pattern_data: PatternData) -> void:
+	if is_transitioning:
+		return
+		
+	is_transitioning = true 
+	
+	click_sound.play()
 	Global.set_pattern(pattern_data)
-	get_tree().change_scene_to_file("res://UI/fabricMenu/FabricMenu.tscn")
+	await click_sound.finished
+	
+	if get_tree():
+		get_tree().change_scene_to_file("res://UI/fabricMenu/FabricMenu.tscn")

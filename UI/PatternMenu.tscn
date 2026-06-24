@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b0yd62xlam7ft"]
 
 [ext_resource type="Texture2D" uid="uid://riwjurjmfs1i" path="res://Assets/UI/pattern-menu/board.png" id="2_unae7"]
+[ext_resource type="AudioStream" uid="uid://c5hxcjdl43mg3" path="res://Assets/audio/computer-mouse-click.wav" id="3_h3la1"]
 [ext_resource type="Texture2D" uid="uid://dwxjmx67vfdpd" path="res://Assets/UI/pattern-menu/Elegi tu molde.png" id="3_unae7"]
 [ext_resource type="Script" uid="uid://rmjf8jphowpv" path="res://UI/pattern_menu.gd" id="5_pattern_menu"]
 
@@ -22,6 +23,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_unae7")
 expand_mode = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=865221554]
+stream = ExtResource("3_h3la1")
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="." unique_id=1396332134]
 layout_mode = 0

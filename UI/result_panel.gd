@@ -8,13 +8,24 @@ signal retry_pressed
 @onready var score_label: Label = $ScoreLabel
 @onready var continue_button: Button = $ContinueButton
 @onready var retry_button: Button = $RetryButton
+@onready var click_sound: AudioStreamPlayer2D = $ClickSound
 @onready var music_btn: TextureButton = $SoundMenu/TextureButton
 @onready var fx_btn: TextureButton = $SoundMenu/TextureButton2
 
 
 func _ready() -> void:
-	continue_button.pressed.connect(func(): continue_pressed.emit())
-	retry_button.pressed.connect(func(): retry_pressed.emit())
+	continue_button.pressed.connect(
+		func():
+			click_sound.play()
+			await click_sound.finished
+			continue_pressed.emit()
+	)
+	retry_button.pressed.connect(
+		func():
+			click_sound.play()
+			await click_sound.finished
+			retry_pressed.emit()
+	)
 	continue_button.focus_mode = Control.FOCUS_ALL
 	retry_button.focus_mode = Control.FOCUS_ALL
 

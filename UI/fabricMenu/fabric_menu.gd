@@ -1,5 +1,7 @@
 extends Control
 
+@onready var click_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 const BTN_SCRIPT := preload("res://UI/fabricMenu/fabric_button.gd")
 
 const FABRICS: Array[String] = [
@@ -9,6 +11,8 @@ const FABRICS: Array[String] = [
 ]
 
 var _buttons: Array = []
+
+var is_transitioning := false
 
 func _ready():
 	_load_fabrics()
@@ -56,5 +60,14 @@ func _move_focus(direction: int) -> void:
 
 
 func _on_button_selected(fabric_data: FabricData) -> void:
+	if is_transitioning:
+		return
+
+	is_transitioning = true
+
+	click_sound.play()
 	Global.set_fabric(fabric_data)
-	get_tree().change_scene_to_file("res://gameplay/CuttingScene.tscn")
+	await click_sound.finished
+
+	if get_tree():
+		get_tree().change_scene_to_file("res://gameplay/CuttingScene.tscn")
