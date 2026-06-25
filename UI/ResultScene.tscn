@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://chv31ikip8n7g" path="res://UI/fonts/Chewy-Regular.ttf" id="2_res01"]
 [ext_resource type="Texture2D" uid="uid://vg670qb5sr56" path="res://Assets/UI/star-disabled.png" id="3_370cf"]
 [ext_resource type="AudioStream" uid="uid://crk5wtpan4gnx" path="res://Assets/audio/shine-4.wav" id="3_rbnem"]
+[ext_resource type="Texture2D" uid="uid://cagr6jbwaix0j" path="res://Assets/UI/button-bg.png" id="6_jm4qy"]
 
 [node name="ResultScene" type="Control" unique_id=495932054]
 layout_mode = 3
@@ -79,20 +80,32 @@ text = "puntaje: 100"
 
 [node name="BackButton" type="Button" parent="." unique_id=345678901]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = -1
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1087.0
-offset_top = -83.0
-offset_right = -862.0
-offset_bottom = -28.0
-grow_horizontal = 0
+offset_left = 66.0
+offset_top = -107.0
+offset_right = 291.0
+offset_bottom = -52.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_res01")
 theme_override_font_sizes/font_size = 36
 text = "Nueva prenda"
+flat = true
+icon_alignment = 1
+text_direction = 1
+
+[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=1897146498]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_jm4qy")
+expand_mode = 1
 
 [node name="PatternMarker" type="Marker2D" parent="." unique_id=436863010]
 position = Vector2(903, 316)
