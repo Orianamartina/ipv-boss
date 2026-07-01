@@ -31,7 +31,7 @@ func _load_fabrics() -> void:
 		btn.set_script(BTN_SCRIPT)
 		btn.ignore_texture_size = true
 		btn.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-		btn.custom_minimum_size = Vector2(350, 350)
+		btn.custom_minimum_size = Vector2(300, 300)
 		btn.focus_mode = Control.FOCUS_ALL
 		container.add_child(btn)
 		btn.fabric_data = fabric_data

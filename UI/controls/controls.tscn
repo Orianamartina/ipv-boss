@@ -1,15 +1,92 @@
 [gd_scene format=3 uid="uid://bjbxjm0r4ijg5"]
 
-[ext_resource type="Script" uid="uid://bsi1lyltm781t" path="res://UI/controls/controls.gd" id="1_8pg06"]
+[ext_resource type="Script" uid="uid://bsi1lyltm781t" path="res://UI/controls/controls.gd" id="1_mpstj"]
+[ext_resource type="Texture2D" uid="uid://c5qwq5brtoq5f" path="res://Assets/UI/result-panel/result-panel-bg.png" id="2_8pg06"]
+[ext_resource type="Texture2D" uid="uid://djrfs7w1txkro" path="res://Assets/UI/controls/joystick-cutting-scene-2.png" id="2_33e8d"]
+[ext_resource type="FontFile" uid="uid://chv31ikip8n7g" path="res://UI/fonts/Chewy-Regular.ttf" id="2_r4u4s"]
+[ext_resource type="Texture2D" uid="uid://bahu5tdbus6cg" path="res://Assets/UI/controls/joystick-cutting-scene.png" id="3_33e8d"]
+[ext_resource type="Texture2D" uid="uid://cagr6jbwaix0j" path="res://Assets/UI/button-bg.png" id="3_mpstj"]
+[ext_resource type="Texture2D" uid="uid://ct21b6mp3vikt" path="res://Assets/UI/controls/steps-cutting-scene.png" id="4_vp1gy"]
 
-[node name="Controls" type="Control" unique_id=816335834]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_8pg06")
+[node name="Controls" type="CanvasLayer" unique_id=1307484420]
+script = ExtResource("1_mpstj")
+image_a = ExtResource("2_33e8d")
+image_b = ExtResource("3_33e8d")
+steps = ExtResource("4_vp1gy")
+title = null
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=616198794]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -399.0
+offset_top = -223.5
+offset_right = 399.0
+offset_bottom = 223.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8pg06")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Image" type="TextureRect" parent="." unique_id=1205844840]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 471.0
+offset_top = 213.0
+offset_right = 697.0
+offset_bottom = 451.0
+texture = ExtResource("2_33e8d")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Title" type="Label" parent="." unique_id=2116735119]
+offset_left = 466.0
+offset_top = 183.0
+offset_right = 709.0
+offset_bottom = 236.0
+theme_override_colors/font_color = Color(0.80784315, 0.4745098, 0.6509804, 1)
+theme_override_fonts/font = ExtResource("2_r4u4s")
+theme_override_font_sizes/font_size = 40
+text = "Hora de cortar!"
 
 [node name="Timer" type="Timer" parent="." unique_id=1740555212]
+
+[node name="SkipButton" type="Button" parent="." unique_id=446449349]
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 492.0
+offset_top = -223.0
+offset_right = 675.0
+offset_bottom = -168.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_r4u4s")
+theme_override_font_sizes/font_size = 32
+text = "Comenzar"
+flat = true
+icon_alignment = 1
+text_direction = 1
+
+[node name="TextureRect" type="TextureRect" parent="SkipButton" unique_id=784732811]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("3_mpstj")
+expand_mode = 1
+
+[node name="Steps" type="TextureRect" parent="." unique_id=1654169206]
+offset_left = 723.0
+offset_top = 157.0
+offset_right = 881.0
+offset_bottom = 303.0
+texture = ExtResource("4_vp1gy")
+expand_mode = 1
+stretch_mode = 4
+
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

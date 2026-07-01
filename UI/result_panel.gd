@@ -12,6 +12,12 @@ signal retry_pressed
 @onready var music_btn: TextureButton = $SoundMenu/TextureButton
 @onready var fx_btn: TextureButton = $SoundMenu/TextureButton2
 
+const AXIS_ENGAGE_THRESHOLD := 0.5
+const AXIS_RELEASE_THRESHOLD := 0.2
+
+var horizontal_locked := false
+var vertical_locked := false
+
 
 func _ready() -> void:
 	continue_button.pressed.connect(
@@ -39,19 +45,28 @@ func _process(_delta: float) -> void:
 	var music_f := music_btn.has_focus()
 	var fx_f    := fx_btn.has_focus()
 
-	# Left/Right: navega dentro de la fila
-	if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
-		if cont_f:
-			retry_button.grab_focus()
-		elif retry_f:
-			continue_button.grab_focus()
-		elif music_f:
-			fx_btn.grab_focus()
-		elif fx_f:
-			music_btn.grab_focus()
+	var h := Input.get_axis("move_left", "move_right")
+	var v := Input.get_axis("move_up", "move_down")
 
-	# Up/Down: navega entre filas manteniendo la columna
-	if Input.is_action_just_pressed("move_up") or Input.is_action_just_pressed("move_down"):
+	# Left/Right: navega dentro de la fila. Un solo paso por movimiento del
+	# analógico: hay que volver a la zona neutral antes de que registre otro.
+	if not horizontal_locked and absf(h) >= AXIS_ENGAGE_THRESHOLD:
+		horizontal_locked = true
+		if cont_f:
+			retry_button.grab_focus()
+		elif retry_f:
+			continue_button.grab_focus()
+		elif music_f:
+			fx_btn.grab_focus()
+		elif fx_f:
+			music_btn.grab_focus()
+	elif horizontal_locked and absf(h) < AXIS_RELEASE_THRESHOLD:
+		horizontal_locked = false
+
+	# Up/Down: navega entre filas manteniendo la columna. Misma lógica de un
+	# solo paso por movimiento del analógico.
+	if not vertical_locked and absf(v) >= AXIS_ENGAGE_THRESHOLD:
+		vertical_locked = true
 		if cont_f:
 			music_btn.grab_focus()
 		elif retry_f:
@@ -60,6 +75,8 @@ func _process(_delta: float) -> void:
 			continue_button.grab_focus()
 		elif fx_f:
 			retry_button.grab_focus()
+	elif vertical_locked and absf(v) < AXIS_RELEASE_THRESHOLD:
+		vertical_locked = false
 
 	# Enter: activa el botón con focus
 	if Input.is_action_just_pressed("enter"):

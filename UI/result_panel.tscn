@@ -2,7 +2,6 @@
 
 [ext_resource type="FontFile" uid="uid://chv31ikip8n7g" path="res://UI/fonts/Chewy-Regular.ttf" id="1_t3gqi"]
 [ext_resource type="AudioStream" uid="uid://c5hxcjdl43mg3" path="res://Assets/audio/computer-mouse-click.wav" id="2_2u5yy"]
-[ext_resource type="Script" uid="uid://b3fsckgnjaqus" path="res://UI/result_panel.gd" id="2_script"]
 [ext_resource type="Texture2D" uid="uid://c5qwq5brtoq5f" path="res://Assets/UI/result-panel/result-panel-bg.png" id="2_8x6lm"]
 [ext_resource type="Script" uid="uid://b3fsckgnjaqus" path="res://UI/result_panel.gd" id="2_script"]
 [ext_resource type="PackedScene" uid="uid://c4c2m3y621udn" path="res://UI/SoundMenu.tscn" id="3_2u5yy"]
@@ -34,10 +33,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -319.0
-offset_top = -149.0
+offset_left = -207.0
+offset_top = -142.0
 offset_right = 293.0
-offset_bottom = -82.0
+offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.7764706, 0.41568628, 0.59607846, 1)
@@ -52,15 +51,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -318.0
-offset_top = -88.0
-offset_right = 293.0
-offset_bottom = 2.0
+offset_left = -209.0
+offset_top = -53.0
+offset_right = 295.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.7764706, 0.41568628, 0.59607846, 1)
 theme_override_fonts/font = ExtResource("1_t3gqi")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 48
 text = "Score 1000"
 horizontal_alignment = 1
 
@@ -74,14 +73,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -260.0
-offset_top = 31.0
-offset_right = -18.0
-offset_bottom = 121.0
+offset_left = -188.0
+offset_top = 28.0
+offset_right = 12.0
+offset_bottom = 91.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Continuar"
-font_size = 40
+font_size = 24
 
 [node name="RetryButton" parent="." unique_id=248671772 instance=ExtResource("4_btn")]
 custom_minimum_size = Vector2(0, 0)
@@ -90,14 +89,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = 27.0
-offset_right = 231.0
-offset_bottom = 125.0
+offset_left = 71.0
+offset_top = 26.0
+offset_right = 274.0
+offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Reintentar"
-font_size = 40
+font_size = 24
 
 [node name="SoundMenu" parent="." unique_id=93759398 instance=ExtResource("3_2u5yy")]
 anchors_preset = 8
@@ -105,9 +104,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = 144.0
-offset_right = 98.0
-offset_bottom = 216.0
+offset_left = -8.0
+offset_top = 112.0
+offset_right = 140.0
+offset_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 2
