@@ -14,6 +14,10 @@ var _buttons: Array = []
 
 var is_transitioning := false
 
+const AXIS_ENGAGE_THRESHOLD := 1.2
+const AXIS_RELEASE_THRESHOLD := 0.8
+var horizontal_locked := false
+
 func _ready():
 	_load_fabrics()
 
@@ -45,10 +49,15 @@ func _load_fabrics() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("move_left"):
-		_move_focus(-1)
-	elif Input.is_action_just_pressed("move_right"):
-		_move_focus(1)
+	var h := Input.get_axis("move_left", "move_right")
+	if not horizontal_locked and absf(h) >= AXIS_ENGAGE_THRESHOLD:
+		horizontal_locked = true
+		if h < 0:
+			_move_focus(-1)
+		else:
+			_move_focus(1)
+	elif horizontal_locked and absf(h) < AXIS_RELEASE_THRESHOLD:
+		horizontal_locked = false
 
 
 func _move_focus(direction: int) -> void:

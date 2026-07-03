@@ -81,9 +81,9 @@ func _process(_delta: float) -> void:
 	# Enter: activa el botón con focus
 	if Input.is_action_just_pressed("enter"):
 		if cont_f:
-			continue_pressed.emit()
+			continue_button.pressed.emit()
 		elif retry_f:
-			retry_pressed.emit()
+			retry_button.pressed.emit()
 		elif music_f:
 			music_btn.pressed.emit()
 		elif fx_f:

@@ -1,6 +1,7 @@
 @tool
 extends CanvasLayer
 
+@onready var click_sound: AudioStreamPlayer2D = $ClickSound
 @export var image_a: Texture2D:
 	set(value):
 		image_a = value
@@ -36,6 +37,10 @@ func _ready() -> void:
 	hide_timer.timeout.connect(_fade_out)
 
 
+func _process(_delta: float) -> void:
+	if skip_button.has_focus() and Input.is_action_just_pressed("enter"):
+		_on_skip_button_pressed()
+
 func _fade_out() -> void:
 	var tween := create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)
@@ -50,4 +55,6 @@ func _on_timer_timeout() -> void:
 	texture_rect.texture = tex
 
 func _on_skip_button_pressed() -> void:
+	click_sound.play()
+	await click_sound.finished
 	_fade_out()
