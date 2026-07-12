@@ -5,6 +5,7 @@ extends Node2D
 @onready var result_panel: ResultPanel = $ResultPanel
 @onready var wood_background: Sprite2D = $WoodBackground
 @onready var sewing_audio: AudioStreamPlayer2D = $Needle/SewingMachine
+@onready var sound_effects: AudioStreamPlayer2D = $AudioFX
 
 var player_line: Line2D
 var pattern_instance: Node2D
@@ -231,12 +232,16 @@ func _finish_sewing() -> void:
 
 func _show_result_panel() -> void:
 	result_panel.setup("Costura terminada!", "Ver resultado")
+	sound_effects.play()
 	var percentage := int(score / float(max_score) * 100.0)
 	result_panel.show_result("%d / %d  (%d%%)" % [int(score), max_score, percentage])
 
 
 func _toggle_pause() -> void:
 	is_paused = true
+	if sewing_audio.playing:
+		sewing_audio.stop()
+
 	result_panel.setup("Pausa", "Reanudar", "Reintentar")
 	result_panel.show_result("Puntaje: %d" % int(score))
 

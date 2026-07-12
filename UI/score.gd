@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var score_label: Label = $HBoxContainer/ScoreLabel
+@onready var points_sounds = $Points
 
 var max_score: int = 5000
 var last_milestone: int = 0
@@ -24,6 +25,7 @@ func update_score(current: float, color: Color = Color.WHITE) -> void:
 		last_milestone = milestone
 		if score_tween:
 			score_tween.kill()
+		points_sounds.play()
 		score_label.pivot_offset = score_label.size / 2.0
 		score_tween = create_tween()
 		score_tween.tween_property(score_label, "scale", Vector2(1.6, 1.6), 0.15).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

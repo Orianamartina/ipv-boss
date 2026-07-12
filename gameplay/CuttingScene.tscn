@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ch7o43no4ex04" path="res://UI/Score.tscn" id="4_e5pjn"]
 [ext_resource type="PackedScene" uid="uid://bjbxjm0r4ijg5" path="res://UI/controls/controls.tscn" id="5_3epqf"]
 [ext_resource type="PackedScene" uid="uid://cwwshcfrjt8nm" path="res://UI/result_panel.tscn" id="5_result"]
+[ext_resource type="AudioStream" uid="uid://bxtg0v26o5o2d" path="res://Assets/audio/level-passed.mp3" id="7_0csdl"]
 
 [node name="CuttingScene" type="Node2D" unique_id=2005483906]
 script = ExtResource("1_8fysm")
@@ -39,3 +40,6 @@ scale = Vector2(2, 2)
 
 [node name="Controls" parent="." unique_id=816335834 instance=ExtResource("5_3epqf")]
 title = "Hora de cortar!"
+
+[node name="AudioFX" type="AudioStreamPlayer2D" parent="." unique_id=540920762]
+stream = ExtResource("7_0csdl")

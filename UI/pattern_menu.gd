@@ -1,6 +1,7 @@
 extends Control
 
-@onready var click_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var click_sound: AudioStreamPlayer2D = $Click
+@onready var select_sound: AudioStreamPlayer2D = $Select
 
 const BTN_SCRIPT := preload("res://UI/pattern_btn.gd")
 
@@ -13,6 +14,7 @@ var is_transitioning := false
 
 func _ready() -> void:
 	_load_patterns()
+
 
 func _load_patterns() -> void:
 	var container := $ButtonsContainer
@@ -52,6 +54,7 @@ func _move_focus(direction: int) -> void:
 		if buttons[i].has_focus():
 			var next := clampi(i + direction, 0, buttons.size() - 1)
 			buttons[next].grab_focus()
+			select_sound.play()
 			return
 
 

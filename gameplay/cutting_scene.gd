@@ -5,6 +5,7 @@ extends Node2D
 @onready var score_hud = $Score
 @onready var result_panel: ResultPanel = $ResultPanel
 @onready var fabric_bg: Sprite2D = $Fabric
+@onready var sound_effects = $AudioFX
 
 var pattern: Node2D
 var path: Path2D
@@ -194,6 +195,7 @@ func _touches_existing_line(pos: Vector2) -> bool:
 
 func _finish_cut() -> void:
 	cutting_active = false
+	sound_effects.play()
 	player_line.add_point(player_line.points[0])
 	scissors.visible = false
 	result_panel.setup("Corte terminado!", "Continuar")

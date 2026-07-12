@@ -1,6 +1,7 @@
 extends Control
 
-@onready var click_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var click_sound: AudioStreamPlayer2D = $Click
+@onready var select_sound:  AudioStreamPlayer2D = $Select
 
 const BTN_SCRIPT := preload("res://UI/fabricMenu/fabric_button.gd")
 
@@ -14,8 +15,8 @@ var _buttons: Array = []
 
 var is_transitioning := false
 
-const AXIS_ENGAGE_THRESHOLD := 1.2
-const AXIS_RELEASE_THRESHOLD := 0.8
+const AXIS_ENGAGE_THRESHOLD := 0.5
+const AXIS_RELEASE_THRESHOLD := 0.2
 var horizontal_locked := false
 
 func _ready():
@@ -44,6 +45,8 @@ func _load_fabrics() -> void:
 		if first:
 			btn.grab_focus()
 			first = false
+
+		btn.focus_entered.connect(select_sound.play)
 
 	_buttons = container.get_children()
 

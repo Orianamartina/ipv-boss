@@ -5,6 +5,11 @@ extends Control
 @onready var stars_container = $StarsContainer
 @onready var back_button = $BackButton
 @onready var star_audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var points_audio: AudioStreamPlayer2D = $Points
+
+const SCORE_MILESTONE_STEP := 1000
+
+var _last_score_milestone := 0
 
 func _ready() -> void:
 	score_label.text = "Puntaje total: 0"
@@ -21,6 +26,7 @@ func _process(_delta: float) -> void:
 
 
 func _animate_score_then_stars() -> void:
+	_last_score_milestone = 0
 	var tween := create_tween()
 	tween.tween_method(_update_score_label, 0.0, float(Global.score), 1.5)
 	tween.tween_callback(_animate_stars)
@@ -28,6 +34,11 @@ func _animate_score_then_stars() -> void:
 
 func _update_score_label(value: float) -> void:
 	score_label.text = "Puntaje total: %d" % int(value)
+
+	var milestone := int(value) / SCORE_MILESTONE_STEP
+	if milestone > _last_score_milestone:
+		_last_score_milestone = milestone
+		points_audio.play()
 
 
 func _animate_stars() -> void:

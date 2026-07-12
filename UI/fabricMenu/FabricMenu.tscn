@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfjnq3vjm0vrj" path="res://UI/fabricMenu/fabric_menu.gd" id="2_6hmhc"]
 [ext_resource type="Texture2D" uid="uid://b1683to2elreq" path="res://Assets/UI/fabric-menu/fabric-menu-bg.png" id="2_i67ww"]
+[ext_resource type="AudioStream" uid="uid://dsbpyq3ihv070" path="res://Assets/audio/fabric-button-select.mp3" id="2_wgep1"]
 [ext_resource type="Texture2D" uid="uid://cr2no0fh68b7u" path="res://Assets/UI/fabric-menu/elegi-tu-tela.png" id="3_6hmhc"]
 [ext_resource type="AudioStream" uid="uid://c5hxcjdl43mg3" path="res://Assets/audio/computer-mouse-click.wav" id="3_6qwxn"]
 
@@ -13,6 +14,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_6hmhc")
+
+[node name="Select" type="AudioStreamPlayer2D" parent="." unique_id=330474809]
+stream = ExtResource("2_wgep1")
+volume_db = -10.0
+bus = &"FX"
+
+[node name="Click" type="AudioStreamPlayer2D" parent="." unique_id=645702298]
+stream = ExtResource("3_6qwxn")
+bus = &"FX"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1188989536]
 layout_mode = 1
@@ -37,9 +47,6 @@ grow_horizontal = 2
 texture = ExtResource("3_6hmhc")
 expand_mode = 1
 stretch_mode = 4
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=645702298]
-stream = ExtResource("3_6qwxn")
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="." unique_id=1396332134]
 layout_mode = 1
