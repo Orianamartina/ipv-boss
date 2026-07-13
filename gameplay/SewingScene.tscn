@@ -12,6 +12,44 @@
 [ext_resource type="Texture2D" uid="uid://coetsuxk88eyo" path="res://Assets/UI/controls/joystick-sewing-scene.png" id="6_edrm5"]
 [ext_resource type="AudioStream" uid="uid://bjjsheidvevf5" path="res://Assets/audio/short_maquina_de_coser_1.wav" id="7_u1q48"]
 
+[sub_resource type="Animation" id="Animation_edrm5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerLineColorRef:default_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y4pwx"]
+resource_name = "color_cycle"
+length = 0.8
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerLineColorRef:default_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4, 0.52575344, 0.6666667, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.45882353, 0.47058824, 0.21960784, 1), Color(0.6465104, 0.36951187, 0.21135822, 1), Color(0.6541529, 0.33390138, 0.4342804, 1), Color(0.5575225, 0.34716257, 0.65703064, 1), Color(0.30309734, 0.4521398, 0.687488, 1), Color(0.24044505, 0.5077646, 0.43306336, 1), Color(0.9046714, 0.95785683, 0.98394316, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5hprn"]
+_data = {
+&"RESET": SubResource("Animation_edrm5"),
+&"color_cycle": SubResource("Animation_y4pwx")
+}
+
 [node name="SewingScene" type="Node2D" unique_id=1535528604]
 script = ExtResource("1_sew01")
 
@@ -27,6 +65,14 @@ region_enabled = true
 region_rect = Rect2(-4500, -4500, 9000, 9000)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1000000002]
+
+[node name="PlayerLineColorRef" type="Line2D" parent="." unique_id=988523665]
+visible = false
+width = 0.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1877287953]
+libraries/ = SubResource("AnimationLibrary_5hprn")
+speed_scale = 0.2
 
 [node name="Needle" type="CanvasLayer" parent="." unique_id=1000000003]
 
