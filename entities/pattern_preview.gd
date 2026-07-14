@@ -12,4 +12,6 @@ func _process(_delta: float) -> void:
 
 func _on_pattern_pressed() -> void:
 	Global.set_pattern(id)
-	get_tree().change_scene_to_file("res://UI/fabricMenu/FabricMenu.tscn")
+	var tree := get_tree()
+	if tree:
+		tree.change_scene_to_file("res://UI/fabricMenu/FabricMenu.tscn")

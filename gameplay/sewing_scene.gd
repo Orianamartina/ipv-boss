@@ -25,6 +25,7 @@ var max_score: int = 5000
 var score: float = 0.0
 var sewing_active := true
 var is_paused := false
+var controls_dismissed := false
 
 var total_path_length: float = 0.0
 var max_progress: float = 0.0
@@ -146,6 +147,9 @@ func _process(delta: float) -> void:
 		return
 
 	if not sewing_active:
+		return
+
+	if not controls_dismissed:
 		return
 
 	var throttle := Input.get_action_strength("accelerate")
@@ -272,8 +276,12 @@ func _on_continue_pressed() -> void:
 		result_panel.visible = false
 		return
 	Global.add_score(int(score))
-	get_tree().change_scene_to_file("res://UI/ResultScene.tscn")
+	var tree := get_tree()
+	if tree:
+		tree.change_scene_to_file("res://UI/ResultScene.tscn")
 
 
 func _on_retry_pressed() -> void:
-	get_tree().reload_current_scene()
+	var tree := get_tree()
+	if tree:
+		tree.reload_current_scene()

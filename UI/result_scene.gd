@@ -140,4 +140,6 @@ func _create_fabric_polygon(pattern_instance: Node2D) -> void:
 
 func _on_back_pressed() -> void:
 	Global.score = 0
-	get_tree().change_scene_to_file("res://UI/PatternMenu.tscn")
+	var tree := get_tree()
+	if tree:
+		tree.change_scene_to_file("res://UI/PatternMenu.tscn")

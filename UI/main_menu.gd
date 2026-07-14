@@ -55,7 +55,9 @@ func animate_rotation(node: Control, angle: float) -> void:
 func _on_start_button_pressed() -> void:
 	click_sound.play()
 	await click_sound.finished
-	get_tree().change_scene_to_file("res://UI/PatternMenu.tscn")
+	var tree := get_tree()
+	if tree:
+		tree.change_scene_to_file("res://UI/PatternMenu.tscn")
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("enter"):

@@ -215,8 +215,12 @@ func _on_continue_pressed() -> void:
 		result_panel.visible = false
 		return
 	Global.add_score(int(score))
-	get_tree().change_scene_to_file("res://gameplay/SewingScene.tscn")
+	var tree := get_tree()
+	if tree:
+		tree.change_scene_to_file("res://gameplay/SewingScene.tscn")
 
 
 func _on_retry_pressed() -> void:
-	get_tree().reload_current_scene()
+	var tree := get_tree()
+	if tree:
+		tree.reload_current_scene()
