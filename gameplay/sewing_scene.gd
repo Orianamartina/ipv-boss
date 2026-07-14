@@ -44,15 +44,6 @@ func _ready() -> void:
 	pattern_instance.scale = Vector2(3, 3)
 	add_child(pattern_instance)
 
-	# Oculta el borde del patrón (PatternLine) para que solo se vea la tela de fondo y la línea del jugador.
-	#pattern_instance.get_node("PatternLine").visible = false
-	
-	# Remueve la textura del borde del patrón (PatternLine) para no superponerla con la línea del jugador.
-	var guide := pattern_instance.get_node("PatternLine")
-	guide.texture = null
-	guide.width = 10.0 
-	guide.default_color = Color(0, 0, 0, 0.7)  # blanco semitransparente
-	
 	path = pattern_instance.get_node("PatternPath")
 	total_path_length = path.curve.get_baked_length()
 
@@ -74,13 +65,15 @@ func _ready() -> void:
 	_create_fabric_polygon()
 
 	player_line = Line2D.new()
-	player_line.width = 8.0
-	player_line.default_color = Color(0.459, 0.471, 0.22)
-	player_line.texture = preload("res://Assets/UI/sewing-scene/stitch_line_3.png")
+	player_line.width = 6.0
+	player_line.default_color = Color(0, 0 , 0, 0.90)
+	player_line.texture = preload("res://Assets/UI/sewing-scene/stitch_line.png")
 	player_line.texture_mode = Line2D.LINE_TEXTURE_TILE
 	player_line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	pattern_instance.add_child(player_line)
 	line_animator.play("color_cycle")
+
+	$Controls.tree_exited.connect(func(): controls_dismissed = true)
 
 	result_panel.setup("Costura terminada!", "Ver resultado")
 	result_panel.continue_pressed.connect(_on_continue_pressed)
@@ -131,14 +124,14 @@ func _create_fabric_polygon() -> void:
 
 
 func _process(delta: float) -> void:
-	# Sincroniza el color animado del PlayerLineColorRef al player_line real,
-	# ajustando brillo y saturación según la tela elegida (FabricData).
+	# Sincroniza el color animado (con brillo/saturación de la tela) a la línea guía del patrón.
 	var base_color := player_line_color_ref.default_color
 	var fabric := Global.current_fabric
 	var bri := fabric.thread_brightness if fabric else 1.0
 	var sat := fabric.thread_saturation if fabric else 1.0
-	player_line.default_color = Color.from_hsv(base_color.h, base_color.s * sat, base_color.v * bri)
-	
+	var guide: Line2D = pattern_instance.get_node("PatternLine")
+	guide.default_color = Color.from_hsv(base_color.h, base_color.s * sat, base_color.v * bri)
+
 	if Input.is_action_just_pressed("pause") and sewing_active:
 		_toggle_pause()
 		return

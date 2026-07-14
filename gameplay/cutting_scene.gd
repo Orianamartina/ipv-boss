@@ -48,6 +48,9 @@ func _ready() -> void:
 	pattern.scale = Vector2(1, 1)
 	add_child(pattern)
 	move_child(pattern, 3)
+	var sprite := pattern.get_node_or_null("Sprite2D")
+	if sprite:
+		sprite.visible = false
 
 	path = pattern.get_node("PatternPath")
 	total_path_length = path.curve.get_baked_length()
