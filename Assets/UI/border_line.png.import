@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drdge105nga7t"
-path="res://.godot/imported/stiches.png-6075310875fbc6ee1479eae87f1a417c.ctex"
+uid="uid://bg5tib7w41gpo"
+path="res://.godot/imported/border_line.png-f560c0478f9f093c23089020e4933162.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/sewing-scene/stiches.png"
-dest_files=["res://.godot/imported/stiches.png-6075310875fbc6ee1479eae87f1a417c.ctex"]
+source_file="res://Assets/UI/border_line.png"
+dest_files=["res://.godot/imported/border_line.png-f560c0478f9f093c23089020e4933162.ctex"]
 
 [params]
 

@@ -6,6 +6,8 @@ extends Node2D
 @onready var wood_background: Sprite2D = $WoodBackground
 @onready var sewing_audio: AudioStreamPlayer2D = $Needle/SewingMachine
 @onready var sound_effects: AudioStreamPlayer2D = $AudioFX
+@onready var player_line_color_ref: Line2D = $PlayerLineColorRef
+@onready var line_animator: AnimationPlayer = $AnimationPlayer
 
 var player_line: Line2D
 var pattern_instance: Node2D
@@ -23,6 +25,7 @@ var max_score: int = 5000
 var score: float = 0.0
 var sewing_active := true
 var is_paused := false
+var controls_dismissed := false
 
 var total_path_length: float = 0.0
 var max_progress: float = 0.0
@@ -62,12 +65,15 @@ func _ready() -> void:
 	_create_fabric_polygon()
 
 	player_line = Line2D.new()
-	player_line.width = 12.0
-	player_line.default_color = Color(1, 1, 1, 1)
-	player_line.texture = preload("res://Assets/UI/sewing-scene/stiches.png")
+	player_line.width = 6.0
+	player_line.default_color = Color(0, 0 , 0, 0.90)
+	player_line.texture = preload("res://Assets/UI/sewing-scene/stitch_line.png")
 	player_line.texture_mode = Line2D.LINE_TEXTURE_TILE
 	player_line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	pattern_instance.add_child(player_line)
+	line_animator.play("color_cycle")
+
+	$Controls.tree_exited.connect(func(): controls_dismissed = true)
 
 	result_panel.setup("Costura terminada!", "Ver resultado")
 	result_panel.continue_pressed.connect(_on_continue_pressed)
@@ -118,6 +124,14 @@ func _create_fabric_polygon() -> void:
 
 
 func _process(delta: float) -> void:
+	# Sincroniza el color animado (con brillo/saturación de la tela) a la línea guía del patrón.
+	var base_color := player_line_color_ref.default_color
+	var fabric := Global.current_fabric
+	var bri := fabric.thread_brightness if fabric else 1.0
+	var sat := fabric.thread_saturation if fabric else 1.0
+	var guide: Line2D = pattern_instance.get_node("PatternLine")
+	guide.default_color = Color.from_hsv(base_color.h, base_color.s * sat, base_color.v * bri)
+
 	if Input.is_action_just_pressed("pause") and sewing_active:
 		_toggle_pause()
 		return
@@ -126,6 +140,9 @@ func _process(delta: float) -> void:
 		return
 
 	if not sewing_active:
+		return
+
+	if not controls_dismissed:
 		return
 
 	var throttle := Input.get_action_strength("accelerate")
@@ -252,8 +269,12 @@ func _on_continue_pressed() -> void:
 		result_panel.visible = false
 		return
 	Global.add_score(int(score))
-	get_tree().change_scene_to_file("res://UI/ResultScene.tscn")
+	var tree := get_tree()
+	if tree:
+		tree.change_scene_to_file("res://UI/ResultScene.tscn")
 
 
 func _on_retry_pressed() -> void:
-	get_tree().reload_current_scene()
+	var tree := get_tree()
+	if tree:
+		tree.reload_current_scene()

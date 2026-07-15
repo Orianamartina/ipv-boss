@@ -20,3 +20,9 @@ extends Resource
 
 ## Color de la línea del patrón en la escena de corte — elegir un color que contraste con esta tela.
 @export var line_color: Color = Color(1, 0, 1, 1)
+
+## Factor de brillo del hilo animado en la costura (0.0 = oscuro, 1.0 = original, >1 = más claro).
+@export var thread_brightness: float = 1.0
+
+## Factor de saturación del hilo animado en la costura (0.0 = gris/pastel, 1.0 = vibrante).
+@export var thread_saturation: float = 1.0

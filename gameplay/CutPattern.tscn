@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://x6unls07c6d2"]
 
 [ext_resource type="Script" uid="uid://bx473px7lbr5t" path="res://gameplay/cut_pattern.gd" id="1_37q1x"]
-[ext_resource type="Texture2D" uid="uid://debi3dgi2aerg" path="res://Assets/UI/border-line.png" id="2_6p0tb"]
+[ext_resource type="Texture2D" uid="uid://bg5tib7w41gpo" path="res://Assets/UI/border_line.png" id="2_6p0tb"]
 
 [sub_resource type="Curve2D" id="Curve2D_hemq2"]
 

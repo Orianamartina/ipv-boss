@@ -12,3 +12,4 @@ display_name = "Tela 2"
 texture = ExtResource("2_go6u7")
 button_texture = ExtResource("2_ktn6n")
 button_focus_texture = ExtResource("1_aaj1j")
+line_color = Color(0.671918, 0.19882134, 0.9204554, 1)

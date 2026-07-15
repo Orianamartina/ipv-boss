@@ -48,6 +48,9 @@ func _ready() -> void:
 	pattern.scale = Vector2(1, 1)
 	add_child(pattern)
 	move_child(pattern, 3)
+	var sprite := pattern.get_node_or_null("Sprite2D")
+	if sprite:
+		sprite.visible = false
 
 	path = pattern.get_node("PatternPath")
 	total_path_length = path.curve.get_baked_length()
@@ -215,8 +218,12 @@ func _on_continue_pressed() -> void:
 		result_panel.visible = false
 		return
 	Global.add_score(int(score))
-	get_tree().change_scene_to_file("res://gameplay/SewingScene.tscn")
+	var tree := get_tree()
+	if tree:
+		tree.change_scene_to_file("res://gameplay/SewingScene.tscn")
 
 
 func _on_retry_pressed() -> void:
-	get_tree().reload_current_scene()
+	var tree := get_tree()
+	if tree:
+		tree.reload_current_scene()

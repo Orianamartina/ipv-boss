@@ -13,3 +13,5 @@ texture = ExtResource("2_k5wk5")
 button_texture = ExtResource("2_b2vou")
 button_focus_texture = ExtResource("1_ldxbj")
 line_color = Color(1, 1, 1, 1)
+thread_brightness = 1.5
+thread_saturation = 0.45

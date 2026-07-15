@@ -30,7 +30,7 @@ stretch_mode = 1
 [node name="Fabric" type="Sprite2D" parent="." unique_id=1224635060]
 
 [node name="PlayerLine" type="Line2D" parent="." unique_id=1871178758]
-default_color = Color(1, 0.70980394, 1, 1)
+default_color = Color(0.96862745, 0.7764706, 0.78431374, 1)
 
 [node name="ScissorsCursor" parent="." unique_id=504322664 instance=ExtResource("2_icwa2")]
 position = Vector2(558, 298)

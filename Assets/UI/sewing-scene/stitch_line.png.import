@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cteutuqhi32io"
-path="res://.godot/imported/red-line.webp-b3589f1e5a23d39170551522eab82cb8.ctex"
+uid="uid://blihql04fqqqk"
+path="res://.godot/imported/stitch_line.png-ac03ff6743e6f5f554c1625d2d63ec98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/sewing-scene/red-line.webp"
-dest_files=["res://.godot/imported/red-line.webp-b3589f1e5a23d39170551522eab82cb8.ctex"]
+source_file="res://Assets/UI/sewing-scene/stitch_line.png"
+dest_files=["res://.godot/imported/stitch_line.png-ac03ff6743e6f5f554c1625d2d63ec98.ctex"]
 
 [params]
 
