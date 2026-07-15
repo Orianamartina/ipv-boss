@@ -21,6 +21,9 @@ extends Resource
 ## Color de la línea del patrón en la escena de corte — elegir un color que contraste con esta tela.
 @export var line_color: Color = Color(1, 0, 1, 1)
 
+## Color del trazo que deja el jugador al cortar (PlayerLine) en la escena de corte.
+@export var cut_path_color: Color = Color(0.96862745, 0.7764706, 0.78431374, 1)
+
 ## Factor de brillo del hilo animado en la costura (0.0 = oscuro, 1.0 = original, >1 = más claro).
 @export var thread_brightness: float = 1.0
 

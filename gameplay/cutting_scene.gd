@@ -57,6 +57,9 @@ func _ready() -> void:
 
 	_setup_fabric_background()
 
+	if Global.current_fabric != null:
+		player_line.default_color = Global.current_fabric.cut_path_color
+
 	var start_local: Vector2 = path.curve.get_baked_points()[0]
 	scissors_position = path.to_global(start_local)
 	scissors.global_position = scissors_position

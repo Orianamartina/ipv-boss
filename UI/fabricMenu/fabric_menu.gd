@@ -20,6 +20,10 @@ const AXIS_RELEASE_THRESHOLD := 0.2
 var horizontal_locked := false
 
 func _ready():
+	# Arranca "bloqueado": si el analógico ya estaba inclinado al entrar a esta
+	# escena, no queremos que eso mueva el foco solo. Hay que volver a neutral
+	# primero para que se habilite la navegación.
+	horizontal_locked = true
 	_load_fabrics()
 
 func _load_fabrics() -> void:
@@ -41,6 +45,18 @@ func _load_fabrics() -> void:
 		container.add_child(btn)
 		btn.fabric_data = fabric_data
 		btn.selected.connect(_on_button_selected)
+
+		# Godot navega los Controls con foco automáticamente usando las acciones
+		# ui_left/ui_right (que por defecto están mapeadas al mismo eje del
+		# joystick que move_left/move_right). Sin esto, cada movimiento del
+		# analógico dispara DOS navegaciones a la vez: la nuestra y la del
+		# motor, lo que se siente como sensibilidad excesiva. Apuntar los
+		# vecinos de foco al propio botón anula esa navegación automática y
+		# deja el control 100% en manos de _move_focus().
+		btn.focus_neighbor_left = NodePath(".")
+		btn.focus_neighbor_right = NodePath(".")
+		btn.focus_neighbor_top = NodePath(".")
+		btn.focus_neighbor_bottom = NodePath(".")
 
 		if first:
 			btn.grab_focus()

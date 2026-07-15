@@ -35,6 +35,15 @@ func _ready() -> void:
 	continue_button.focus_mode = Control.FOCUS_ALL
 	retry_button.focus_mode = Control.FOCUS_ALL
 
+	# Igual que en fabric_menu.gd: anulamos la navegación automática de Godot
+	# (ui_left/right/up/down comparten eje con move_left/right/up/down) para
+	# que la única lógica que mueva el foco sea la nuestra en _process().
+	for btn: Control in [continue_button, retry_button, music_btn, fx_btn]:
+		btn.focus_neighbor_left = NodePath(".")
+		btn.focus_neighbor_right = NodePath(".")
+		btn.focus_neighbor_top = NodePath(".")
+		btn.focus_neighbor_bottom = NodePath(".")
+
 
 func _process(_delta: float) -> void:
 	if not visible:
@@ -100,3 +109,10 @@ func show_result(score_text: String) -> void:
 	score_label.text = score_text
 	visible = true
 	continue_button.grab_focus()
+
+	# Reset: si el jugador venía sosteniendo el analógico en una dirección
+	# durante el minijuego, no queremos que ese estado "arrastrado" mueva el
+	# foco apenas se abre el panel. Bloqueamos ambos ejes y exigimos volver a
+	# neutral antes de que la navegación vuelva a responder.
+	horizontal_locked = true
+	vertical_locked = true
