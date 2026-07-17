@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://xkekkuh8d25"]
+
+[ext_resource type="Script" uid="uid://cmnk4n28p4ubo" path="res://UI/credits.gd" id="1_credits"]
+[ext_resource type="FontFile" uid="uid://d1gbk8j5mjfmv" path="res://Assets/fonts/Chewy-Regular.ttf" id="3_font"]
+[ext_resource type="Texture2D" uid="uid://bb2kwyy2pnx0d" path="res://Assets/UI/main-menu/green_flower.png" id="4_flower"]
+[ext_resource type="Texture2D" uid="uid://cqvmjwqpykfwx" path="res://Assets/UI/main-menu/pink_star.png" id="5_star"]
+[ext_resource type="AudioStream" uid="uid://c5hxcjdl43mg3" path="res://Assets/audio/computer-mouse-click.wav" id="7_click"]
+[ext_resource type="Texture2D" uid="uid://cagr6jbwaix0j" path="res://Assets/UI/button-bg.png" id="8_btnbg"]
+
+[node name="Credits" type="Control" unique_id=1045781214]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_credits")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1090073966]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.92, 0.84, 0.72, 1)
+
+[node name="GreenFlower" type="TextureRect" parent="." unique_id=1291346904]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -71.0
+offset_top = 273.99997
+offset_right = 359.0
+offset_bottom = 704.0
+scale = Vector2(0.35, 0.35)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("4_flower")
+
+[node name="PinkStar" type="TextureRect" parent="." unique_id=637081891]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 762.99994
+offset_top = -96.000015
+offset_right = 1193.0
+offset_bottom = 334.0
+scale = Vector2(0.4, 0.4)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_star")
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1202197055]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.12
+anchor_right = 0.5
+anchor_bottom = 0.12
+offset_left = -200.0
+offset_top = -10.0
+offset_right = 200.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.776, 0.416, 0.596, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 60
+text = "Créditos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name1" type="Label" parent="." unique_id=1229733830]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.28
+anchor_right = 0.5
+anchor_bottom = 0.28
+offset_left = -250.0
+offset_top = -20.0
+offset_right = 250.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.25, 0.12, 0.05, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 46
+text = "Lara Noelí Cardozo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name2" type="Label" parent="." unique_id=1610663936]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.36
+anchor_right = 0.5
+anchor_bottom = 0.36
+offset_left = -250.0
+offset_top = -20.0
+offset_right = 250.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.25, 0.12, 0.05, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 46
+text = "Oriana Pettinelli"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Role1" type="Label" parent="." unique_id=707512895]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.46
+anchor_right = 0.5
+anchor_bottom = 0.46
+offset_left = -200.0
+offset_top = -15.0
+offset_right = 200.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0.2, 0.1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 30
+text = "Diseñadoras, ideadoras y desarrolladoras"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Role2" type="Label" parent="." unique_id=1000446742]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.52
+anchor_right = 0.5
+anchor_bottom = 0.52
+offset_left = -200.0
+offset_top = -15.0
+offset_right = 200.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0.2, 0.1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 30
+text = " del Taller de los Retazos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ThanksLabel" type="Label" parent="." unique_id=944797332]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.64
+anchor_right = 0.5
+anchor_bottom = 0.64
+offset_left = -200.0
+offset_top = -20.0
+offset_right = 200.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.776, 0.416, 0.596, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 40
+text = "¡Gracias por jugar!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=776943602]
+stream = ExtResource("7_click")
+
+[node name="BackButton" type="Button" parent="." unique_id=968693156]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.0
+offset_top = 481.0
+offset_right = 189.0
+offset_bottom = 611.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0.25, 0.12, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.3, 0.15, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.15, 0.07, 0.02, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 64
+text = "Inicio"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=707287840]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_btnbg")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

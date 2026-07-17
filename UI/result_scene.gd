@@ -4,8 +4,10 @@ extends Control
 @onready var pattern_marker = $PatternMarker
 @onready var stars_container = $StarsContainer
 @onready var back_button = $BackButton
+@onready var back_button_2: Button = $BackButton2
 @onready var star_audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var points_audio: AudioStreamPlayer2D = $Points
+@onready var click_sound: AudioStreamPlayer2D = $ClickSound
 
 const SCORE_MILESTONE_STEP := 1000
 
@@ -17,12 +19,16 @@ func _ready() -> void:
 	back_button.pressed.connect(_on_back_pressed)
 	back_button.focus_mode = Control.FOCUS_ALL
 	back_button.grab_focus()
+	back_button_2.pressed.connect(_on_back_2_pressed)
+	back_button_2.focus_mode = Control.FOCUS_ALL
 	_animate_score_then_stars()
 
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("enter") and back_button.has_focus():
 		_on_back_pressed()
+	elif Input.is_action_just_pressed("enter") and back_button_2.has_focus():
+		_on_back_2_pressed()
 
 
 func _animate_score_then_stars() -> void:
@@ -140,6 +146,16 @@ func _create_fabric_polygon(pattern_instance: Node2D) -> void:
 
 func _on_back_pressed() -> void:
 	Global.score = 0
+	click_sound.play()
 	var tree := get_tree()
+	await click_sound.finished
 	if tree:
 		tree.change_scene_to_file("res://UI/PatternMenu.tscn")
+
+func _on_back_2_pressed() -> void:
+	Global.score = 0
+	click_sound.play()
+	var tree := get_tree()
+	await click_sound.finished
+	if tree:
+		tree.change_scene_to_file("res://UI/Credits.tscn")

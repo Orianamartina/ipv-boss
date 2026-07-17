@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://crk5wtpan4gnx" path="res://Assets/audio/shine-4.wav" id="3_rbnem"]
 [ext_resource type="Texture2D" uid="uid://cagr6jbwaix0j" path="res://Assets/UI/button-bg.png" id="6_jm4qy"]
 [ext_resource type="AudioStream" uid="uid://c7hfsc6b00kcg" path="res://Assets/audio/points-milestone.mp3" id="7_scount"]
+[ext_resource type="AudioStream" uid="uid://c5hxcjdl43mg3" path="res://Assets/audio/computer-mouse-click.wav" id="7_yxbdq"]
 
 [node name="ResultScene" type="Control" unique_id=495932054]
 layout_mode = 3
@@ -84,6 +85,9 @@ theme_override_fonts/font = ExtResource("2_res01")
 theme_override_font_sizes/font_size = 50
 text = "puntaje: 100"
 
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="." unique_id=1915078599]
+stream = ExtResource("7_yxbdq")
+
 [node name="BackButton" type="Button" parent="." unique_id=345678901]
 layout_mode = 1
 anchors_preset = -1
@@ -102,6 +106,35 @@ icon_alignment = 1
 text_direction = 1
 
 [node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=1897146498]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_jm4qy")
+expand_mode = 1
+
+[node name="BackButton2" type="Button" parent="." unique_id=1129189716]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 318.0
+offset_top = -107.0
+offset_right = 543.0
+offset_bottom = -52.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_res01")
+theme_override_font_sizes/font_size = 36
+text = "Salir del juego"
+flat = true
+icon_alignment = 1
+text_direction = 1
+
+[node name="TextureRect" type="TextureRect" parent="BackButton2" unique_id=92517241]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
